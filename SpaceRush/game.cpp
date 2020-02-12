@@ -3,6 +3,7 @@
 #include "scenestates.h"
 #include "menu.h"
 
+const sf::Time Game::timePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game():window(sf::VideoMode(1800,960), "Space Rush")
 {

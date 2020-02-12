@@ -2,8 +2,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-GamePlay::GamePlay(SceneManager& stateManager, sf::RenderWindow& window)
-    : Scene{ stateManager, window } 
+GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window)
+    : Scene{sceneManager, window} 
 {
 }
 
@@ -30,7 +30,8 @@ void GamePlay::processEvents() {
     }
 }
 
-void GamePlay::update(const sf::Time& dt) {
+void GamePlay::update(const sf::Time& dt)
+{
 
 }
 

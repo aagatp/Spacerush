@@ -1,6 +1,6 @@
 #pragma once
-class Container :
-	public Widget
+#include "widget.h"
+class Container :public Widget
 {
 };
 
