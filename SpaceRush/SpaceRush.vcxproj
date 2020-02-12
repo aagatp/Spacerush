@@ -144,11 +144,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="application.cpp" />
+    <ClCompile Include="button.cpp" />
+    <ClCompile Include="container.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameover.cpp" />
+    <ClCompile Include="gameplay.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="multiplayer.cpp" />
+    <ClCompile Include="scenemanager.cpp" />
+    <ClCompile Include="textbox.cpp" />
+    <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="application.hpp" />
+    <ClInclude Include="button.h" />
+    <ClInclude Include="container.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="gameover.h" />
+    <ClInclude Include="gameplay.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="multiplayer.h" />
+    <ClInclude Include="resourceholder.h" />
+    <ClInclude Include="resourceidentifiers.h" />
+    <ClInclude Include="scene.h" />
+    <ClInclude Include="scenemanager.h" />
+    <ClInclude Include="scenestates.h" />
+    <ClInclude Include="textbox.h" />
+    <ClInclude Include="widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
