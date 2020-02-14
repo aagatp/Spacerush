@@ -5,6 +5,7 @@
 GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window)
     : Scene{sceneManager, window} 
 {
+
 }
 
 GamePlay::~GamePlay() 

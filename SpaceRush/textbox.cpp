@@ -20,7 +20,7 @@ void TextBox::render(sf::RenderTarget& renderer)
 }
 void TextBox::setColor(sf::Color color)
 {
-    m_textbox.setFillColor(sf::Color::Red);
+    m_textbox.setFillColor(color);
 }
 void TextBox::setPos(const sf::Vector2f& pos)
 {

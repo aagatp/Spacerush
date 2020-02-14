@@ -24,11 +24,9 @@ public:
     void draw();
 private:
     sf::Sprite bgSprite;
-    TextureHolder bgTextures;
-    FontHolder fontholder;
     sf::Font mFont;
     std::vector<Button::buttonPtr>mButtons;
-    //std::vector<TextBox::textboxPtr> mTextBox;
+    std::vector<TextBox::textboxPtr> mTextBox;
     MenuScreen currentScreen;
     bool isSelected[6];
     bool isClicked;

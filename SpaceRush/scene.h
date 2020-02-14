@@ -1,6 +1,7 @@
 #pragma once
 
 #include "resourceidentifiers.h"
+#include "resourceholder.h"
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -12,7 +13,11 @@ class Scene
 public:
     Scene(SceneManager& m_sceneManager, sf::RenderWindow& m_window)
         : sceneManager{ m_sceneManager }
-        , window{ m_window } {}
+        , window{ m_window } 
+    {
+        bgTextures.load(Textures::Game, "background.jpg");
+        fontholder.load(Fonts::Game, "gamefont.ttf");
+    }
 
     virtual ~Scene() {}
 
@@ -22,4 +27,6 @@ public:
 protected:
     SceneManager& sceneManager;
     sf::RenderWindow& window;
+    FontHolder fontholder;
+    TextureHolder bgTextures;
 };

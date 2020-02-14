@@ -5,7 +5,7 @@
 
 const sf::Time Game::timePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game():window(sf::VideoMode(1800,960), "Space Rush")
+Game::Game():window(sf::VideoMode::getDesktopMode(), "Space Rush",sf::Style::Fullscreen)
 {
 	window.setKeyRepeatEnabled(false);
 	window.setVerticalSyncEnabled(true);

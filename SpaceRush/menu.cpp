@@ -13,47 +13,45 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 {
 	
     window.setMouseCursorVisible(true);
-	int screenWidgth = window.getSize().x;
-	int screenHeight = window.getSize().y;
-	bgTextures.load(Textures::Game, "background.jpg");
+	float screenWidgth = window.getSize().x;
+	float screenHeight = window.getSize().y;
+	
     sf::Texture& bgTexture = bgTextures.get(Textures::Game);
 	bgTexture.setRepeated(true);
-	sf::Vector2i pos(800, 450);
-	sf::Vector2i size(1600, 900);
+	sf::Vector2i pos(screenWidgth/2, screenHeight/2);
+	sf::Vector2i size(screenWidgth,screenHeight);
 	bgSprite.setTextureRect(sf::IntRect(pos,size));
     bgSprite.setTexture(bgTexture);
-
-	fontholder.load(Fonts::Game, "gamefont.ttf");
     sf::Font& mFont = fontholder.get(Fonts::Game);
 
 	auto playBtn = std::make_shared<Button>();
 	playBtn->setAttributes("Play", 24, mFont);
-	playBtn->setPos({ 500,500 });
+	playBtn->setPos({ screenWidgth/2-40,600 });
 	playBtn->setColor(sf::Color::White);
 
 	auto aboutBtn = std::make_shared<Button>();
 	aboutBtn->setAttributes("About", 24, mFont);
-	aboutBtn->setPos({ 500,600 });
+	aboutBtn->setPos({ screenWidgth / 2-40,700 });
 	aboutBtn->setColor(sf::Color::White);
 
 	auto exitBtn = std::make_shared<Button>();
 	exitBtn->setAttributes("Exit", 24, mFont);
-	exitBtn->setPos({ 500,700 });
+	exitBtn->setPos({ screenWidgth / 2-40,800 });
 	exitBtn->setColor(sf::Color::White);
 
 	auto joinBtn = std::make_shared<Button>();
 	joinBtn->setAttributes("Join Game", 24, mFont);
-	joinBtn->setPos({ 800,500 });
+	joinBtn->setPos({ screenWidgth / 2-40,600 });
 	joinBtn->setColor(sf::Color::White);
 	
 	auto hostBtn = std::make_shared<Button>();
 	hostBtn->setAttributes("Host Game", 24, mFont);
-	hostBtn->setPos({ 800,600 });
+	hostBtn->setPos({ screenWidgth / 2-40,700 });
 	hostBtn->setColor(sf::Color::White);
 
 	auto backBtn = std::make_shared<Button>();
 	backBtn->setAttributes("Back", 24, mFont);
-	backBtn->setPos({ 800,700 });
+	backBtn->setPos({ screenWidgth-300,screenHeight-100});
 	backBtn->setColor(sf::Color::White);
 
 	mButtons.push_back(playBtn);
@@ -63,6 +61,25 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	mButtons.push_back(hostBtn);
 	mButtons.push_back(backBtn);
 
+	auto titleText = std::make_shared<TextBox>();
+	titleText->setAttributes("Space Rush", 38, mFont);
+	titleText->setPos({ screenWidgth / 2 - 100,200 });
+	titleText->setColor(sf::Color::Red);
+	
+	auto readText = std::make_shared<TextBox>();
+	readText->setAttributes("The game involves a race between two Spaceships",24, mFont);
+	readText->setPos({100,700});
+	readText->setColor(sf::Color::White);
+
+	auto creditsText = std::make_shared<TextBox>();
+	readText->setAttributes("Developed with lots of love and code.", 24, mFont);
+	readText->setPos({ 100,800});
+	readText->setColor(sf::Color::White);
+
+	mTextBox.push_back(titleText);
+	mTextBox.push_back(readText);
+	mTextBox.push_back(creditsText);
+	
 	for (int i = 0; i < 6; i++)
 	{
 		isSelected[i] = false;
@@ -193,7 +210,28 @@ void Menu::update(const sf::Time& dt)
 			break;
 
 		case MenuScreen::About:
-			// About About
+			if (mButtons.at(5)->getGlobalBounds().contains(mouseX, mouseY))
+			{
+				if (!isSelected[5])
+				{
+					isSelected[5] = true;
+					mButtons.at(5)->setColor(sf::Color::Red);
+				}
+			}
+			else
+			{
+				if (isSelected[5])
+				{
+					isSelected[5] = false;
+					mButtons.at(5)->setColor(sf::Color::White);
+				}
+			}
+
+			if (isClicked)
+			{
+				if (isSelected[5])
+					currentScreen = MenuScreen::Main;
+			}
 			break;
 		}
 	}
@@ -210,17 +248,24 @@ void Menu::draw() {
 		{
 			mButtons.at(i)->render(window);
 		}
+		mTextBox.at(0)->render(window);
 		break;
 	case MenuScreen::Multiplayer:
 		for (int j = 3; j < 6; j++)
 		{
 			mButtons.at(j)->render(window);
 		}
+		mTextBox.at(0)->render(window);
 		break;
 	case MenuScreen::About:
-		break;
+		for (int k = 0; k < 3; k++)
+		{
+			mTextBox.at(k)->render(window);
+		}
+		mButtons.at(5)->render(window);
 	}
 
     window.display();
 }
 
+// Bug in cursor in About Page and readText is not rendered.

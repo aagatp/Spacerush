@@ -1,20 +1,60 @@
 ﻿  menu.cpp
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(114,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(16,21): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(17,21): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(21,47): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(21,31): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(22,33): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(22,20): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(131,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(114,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(131,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(156,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(173,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(156,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(173,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(213,59): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(213,51): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
