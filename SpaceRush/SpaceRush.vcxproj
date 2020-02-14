@@ -145,7 +145,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="button.cpp" />
-    <ClCompile Include="container.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameover.cpp" />
     <ClCompile Include="gameplay.cpp" />
@@ -154,11 +153,9 @@
     <ClCompile Include="multiplayer.cpp" />
     <ClCompile Include="scenemanager.cpp" />
     <ClCompile Include="textbox.cpp" />
-    <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
-    <ClInclude Include="container.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameover.h" />
     <ClInclude Include="gameplay.h" />

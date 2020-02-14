@@ -33,13 +33,7 @@
     <ClCompile Include="gameover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="container.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="textbox.cpp">
@@ -75,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gameover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="button.h">

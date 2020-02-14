@@ -11,10 +11,9 @@ namespace Textures
 {
 	enum ID
 	{
+		Game,
 		Entities,
 		Space,
-		TitleScreen,
-		Buttons,
 		Explosion,
 		Particle,
 		FinishLine,
@@ -25,7 +24,7 @@ namespace Fonts
 {
 	enum ID
 	{
-		Main,
+		Game,
 	};
 }
 

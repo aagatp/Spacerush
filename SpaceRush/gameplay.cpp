@@ -36,6 +36,6 @@ void GamePlay::update(const sf::Time& dt)
 }
 
 void GamePlay::draw() {
-    window.clear(sf::Color::Black);
+    window.clear(sf::Color::Red);
     window.display();
 }

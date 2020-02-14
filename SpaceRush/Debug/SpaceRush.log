@@ -1,5 +1,22 @@
-﻿  game.cpp
-  gameplay.cpp
-  main.cpp
-  Generating Code...
+﻿  menu.cpp
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(114,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(114,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(156,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(156,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   SpaceRush.vcxproj -> C:\Users\Aagat\source\repos\SpaceRush\Debug\SpaceRush.exe
