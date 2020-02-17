@@ -16,7 +16,7 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	float screenWidgth = window.getSize().x;
 	float screenHeight = window.getSize().y;
 	
-    sf::Texture& bgTexture = bgTextures.get(Textures::Game);
+    sf::Texture& bgTexture = bgTextures.get(Textures::Space);
 	bgTexture.setRepeated(true);
 	sf::Vector2i pos(screenWidgth/2, screenHeight/2);
 	sf::Vector2i size(screenWidgth,screenHeight);
@@ -63,7 +63,7 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 
 	auto titleText = std::make_shared<TextBox>();
 	titleText->setAttributes("Space Rush", 38, mFont);
-	titleText->setPos({ screenWidgth / 2 - 100,200 });
+	titleText->setPos({ screenWidgth / 2 - 150,200 });
 	titleText->setColor(sf::Color::Red);
 	
 	auto readText = std::make_shared<TextBox>();
@@ -97,7 +97,8 @@ void Menu::processEvents() {
 		switch (event.type)
 		{
 		case sf::Event::Closed:
-			window.close();
+			//window.close();
+			sceneManager.quit();
 			break;
 		case sf::Event::MouseMoved:
 			mouseX = event.mouseMove.x;
@@ -160,7 +161,7 @@ void Menu::update(const sf::Time& dt)
 					else
 					{
 						if (isSelected[2])
-							window.close();
+							sceneManager.quit();
 					}
 				}
 				isClicked = false;

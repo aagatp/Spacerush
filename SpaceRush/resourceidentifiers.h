@@ -11,11 +11,16 @@ namespace Textures
 {
 	enum ID
 	{
-		Game,
-		Entities,
 		Space,
+		Player1Aircraft,
+		Player2Aircraft,
+		Player1Fire,
+		Player2Fire,
+		Player1Missile,
+		Player2Missile,
 		Explosion,
-		Particle,
+		Asteriods,
+		CollectPickup,
 		FinishLine,
 	};
 }
@@ -32,13 +37,10 @@ namespace SoundEffect
 {
 	enum ID
 	{
-		Player1Fire,
-		Player2Fire,
-		Explosion1,
-		Explosion2,
-		Player1Missile,
-		Player2Missile,
-		CollectPickup,
+		PlayerFire,
+		Explosion,
+		PlayerMissile,
+		MissilePickUp,
 		Button,
 	};
 }

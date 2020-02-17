@@ -29,32 +29,32 @@ C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(22,20): warning C4244: 
           [
               T=int
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(131,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(132,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(131,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(132,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(173,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(174,60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(173,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(174,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(213,59): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(214,59): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(213,51): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Aagat\source\repos\SpaceRush\SpaceRush\menu.cpp(214,51): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float

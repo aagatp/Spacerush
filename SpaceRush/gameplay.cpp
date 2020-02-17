@@ -1,11 +1,21 @@
 #include "gameplay.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "gameover.h"
 
 GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window)
-    : Scene{sceneManager, window} 
+    : Scene{sceneManager, window}, mWorld(window),mControl(),gamePlay(0)
 {
+    window.setMouseCursorVisible(true);
+    float screenWidgth = window.getSize().x;
+    float screenHeight = window.getSize().y*3;
 
+    sf::Texture& bgTexture = bgTextures.get(Textures::Space);
+    bgTexture.setRepeated(true);
+    sf::Vector2i pos(screenWidgth / 2, screenHeight / 2);
+    sf::Vector2i size(screenWidgth, screenHeight);
+    bgSprite.setTextureRect(sf::IntRect(pos, size));
+    bgSprite.setTexture(bgTexture);
 }
 
 GamePlay::~GamePlay() 
@@ -16,27 +26,42 @@ GamePlay::~GamePlay()
 void GamePlay::processEvents() {
     sf::Event event;
 
-    while (window.pollEvent(event)) {
-        switch (event.type) {
-        case sf::Event::Closed:
+    if (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed|| event.key.code==sf::Keyboard::Escape)
+        {
             sceneManager.quit();
-            return;
-        case sf::Event::KeyPressed:
-            switch (event.key.code) {
-            case sf::Keyboard::Escape:
-                sceneManager.quit();
-                return;
-            }
+        }
+        else
+        {
+            mControl.handleEvents(event, mWorld);
         }
     }
 }
 
 void GamePlay::update(const sf::Time& dt)
 {
-
+    if (gamePlay == 0)
+    {
+        mWorld.update(dt);
+        if (mWorld.checkGameStatus() == 1)
+        {
+            gamePlay = 1;
+        }
+        else if (mWorld.checkGameStatus() == 2)
+        {
+            gamePlay = 2;
+        }
+        mControl.handleInputs(mWorld);
+    }
+    else
+    {
+        std::unique_ptr<Scene> gameOver(new GameOver(sceneManager, window, gamePlay));
+        sceneManager.changeScene(std::move(gameOver));
+    }
 }
 
 void GamePlay::draw() {
-    window.clear(sf::Color::Red);
-    window.display();
+    window.clear(sf::Color::Black);
+    window.draw(bgSprite);
+    mWorld.draw();
 }

@@ -15,8 +15,8 @@ public:
         : sceneManager{ m_sceneManager }
         , window{ m_window } 
     {
-        bgTextures.load(Textures::Game, "background.jpg");
-        fontholder.load(Fonts::Game, "gamefont.ttf");
+        bgTextures.load(Textures::Space, "Assets/background.jpg");
+        fontholder.load(Fonts::Game, "Assets/gamefont.ttf");
     }
 
     virtual ~Scene() {}

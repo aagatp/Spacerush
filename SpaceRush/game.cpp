@@ -1,6 +1,5 @@
 #include "game.h"
 #include <SFML/Graphics.hpp>
-#include "scenestates.h"
 #include "menu.h"
 
 const sf::Time Game::timePerFrame = sf::seconds(1.f / 60.f);

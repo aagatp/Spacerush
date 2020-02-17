@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="controls.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameover.cpp" />
     <ClCompile Include="gameplay.cpp" />
@@ -153,9 +154,11 @@
     <ClCompile Include="multiplayer.cpp" />
     <ClCompile Include="scenemanager.cpp" />
     <ClCompile Include="textbox.cpp" />
+    <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
+    <ClInclude Include="controls.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameover.h" />
     <ClInclude Include="gameplay.h" />
@@ -165,9 +168,9 @@
     <ClInclude Include="resourceidentifiers.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="scenemanager.h" />
-    <ClInclude Include="scenestates.h" />
     <ClInclude Include="textbox.h" />
     <ClInclude Include="widget.h" />
+    <ClInclude Include="world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
