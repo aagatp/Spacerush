@@ -1,7 +1,28 @@
+Debug/
+.vs/
 
-/Debug/
-/.vs/
-/SpaceRush/Debug/
-/SpaceRush/*.dll
-/SpaceRush/SpaceRush.vcxproj.user
+# VS files
+*.db
+*.opendb
+*.sdf
 
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Executables
+*.exe
+*.out
+*.app
+
+SpaceRush/Debug/
+SpaceRush/SpaceRush.vcxproj.user
