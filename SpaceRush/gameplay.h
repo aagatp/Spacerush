@@ -15,7 +15,7 @@ public:
     void draw();
 private:
     World mWorld;
-    Controls mControl;
+    /*Controls mControl;*/
     sf::Sprite bgSprite;
     int gamePlay;
 };

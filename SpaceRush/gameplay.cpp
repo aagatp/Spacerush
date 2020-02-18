@@ -4,11 +4,11 @@
 #include "gameover.h"
 
 GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window)
-    : Scene{sceneManager, window}, mWorld(window),mControl(),gamePlay(0)
+    : Scene{sceneManager, window}, mWorld(window),gamePlay(0)
 {
     window.setMouseCursorVisible(true);
     float screenWidgth = window.getSize().x;
-    float screenHeight = window.getSize().y*3;
+    float screenHeight = window.getSize().y*30;
 
     sf::Texture& bgTexture = bgTextures.get(Textures::Space);
     bgTexture.setRepeated(true);
@@ -31,10 +31,6 @@ void GamePlay::processEvents() {
         {
             sceneManager.quit();
         }
-        else
-        {
-            mControl.handleEvents(event, mWorld);
-        }
     }
 }
 
@@ -51,7 +47,7 @@ void GamePlay::update(const sf::Time& dt)
         {
             gamePlay = 2;
         }
-        mControl.handleInputs(mWorld);
+        mWorld.handleInputs(dt);
     }
     else
     {

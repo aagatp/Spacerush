@@ -1,4 +1,5 @@
 #include "world.h"
+#include "iostream"
 
 World::World(sf::RenderWindow& window):window(window),firstPlayer(true),secondPlayer(true)
 {
@@ -24,26 +25,9 @@ World::World(sf::RenderWindow& window):window(window),firstPlayer(true),secondPl
 }
 void World::update(sf::Time dt)
 {
-	/*lookAtMouse(firstPlayerSprite[0]);*/
+	lookAtMouse(firstPlayerSprite[0]);
 	time = dt;
 }
-//void World::lookAtMouse(sf::Sprite& sprite)
-//{
-//	sf::Vector2f curPos = sprite.getPosition();
-//	sf::Vector2i position = sf::Mouse::getPosition(window);
-//
-//	// now we have both the sprite position and the cursor
-//	// position lets do the calculation so our sprite will
-//	// face the position of the mouse
-//	const float PI = 3.14159265;
-//
-//	float dx = curPos.x - position.x;
-//	float dy = curPos.y - position.y;
-//
-//	float rotation = (atan2(dy, dx)) * 180 / PI;
-//
-//	sprite.setRotation(rotation);
-//}
 void World::moveAircraft(float x, float y)
 {
 	firstPlayerSprite[0].move(x, y);
@@ -59,6 +43,29 @@ int World::checkGameStatus()
 		return 1;
 	else if (firstPlayer==false)
 		return 2;
+}
+void World::lookAtMouse(sf::Sprite& sprite)
+{
+	sf::Vector2f curPos;
+	curPos.x =sprite.getGlobalBounds().left;
+	curPos.y = sprite.getGlobalBounds().top;
+	sf::Vector2i position = sf::Mouse::getPosition(window);
+	position = sf::Vector2i(window.mapPixelToCoords(position, mWorldView));
+
+	const float PI = 3.14159265;
+
+	float dx = curPos.x - position.x;
+	float dy = curPos.y - position.y;
+	rotation = (atan2(dy, dx)) * 180 / PI;
+
+	sprite.setRotation(rotation+270);
+}
+void World::handleInputs(const sf::Time& dt)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		moveAircraft(1.f*cos(rotation), 1.f*sin(rotation));
+	}
 }
 void World::draw()
 {
