@@ -34,6 +34,7 @@ void Controls::handleInputs(World& mWorld)
 		}
 	}
 }
+
 void Controls::handleKeyboard(sf::Keyboard::Key key, World& mWorld)
 {
 	switch (key)

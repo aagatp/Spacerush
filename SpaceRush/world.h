@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include "resourceholder.h"
 #include "resourceidentifiers.h"
-
+#include "controls.h"
 class World
 {
 public:
@@ -12,11 +12,11 @@ public:
 	void update(sf::Time dt);
 	int checkGameStatus();
 	void moveAircraft(float x, float y);
+	sf::RenderWindow& window;
 private:
 	sf::Vector2f getPositionAircraft();
-	float firstYPos;
 	sf::Time time;
-	sf::RenderWindow& window;
+	//void lookAtMouse(sf::Sprite& sprite);
 	sf::View mWorldView;
 	TextureHolder textures;
 	std::vector <sf::Sprite> firstPlayerSprite;

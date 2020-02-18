@@ -24,8 +24,26 @@ World::World(sf::RenderWindow& window):window(window),firstPlayer(true),secondPl
 }
 void World::update(sf::Time dt)
 {
+	/*lookAtMouse(firstPlayerSprite[0]);*/
 	time = dt;
 }
+//void World::lookAtMouse(sf::Sprite& sprite)
+//{
+//	sf::Vector2f curPos = sprite.getPosition();
+//	sf::Vector2i position = sf::Mouse::getPosition(window);
+//
+//	// now we have both the sprite position and the cursor
+//	// position lets do the calculation so our sprite will
+//	// face the position of the mouse
+//	const float PI = 3.14159265;
+//
+//	float dx = curPos.x - position.x;
+//	float dy = curPos.y - position.y;
+//
+//	float rotation = (atan2(dy, dx)) * 180 / PI;
+//
+//	sprite.setRotation(rotation);
+//}
 void World::moveAircraft(float x, float y)
 {
 	firstPlayerSprite[0].move(x, y);

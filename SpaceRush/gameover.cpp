@@ -30,7 +30,7 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	auto gameText = std::make_shared<TextBox>();
 	gameText->setAttributes(winnerName, 30, mFont);
 	gameText->setPos({ 100,300});
-	gameText->setColor(sf::Color::Red);
+	gameText->setColor(sf::Color::Blue);
 	mTextBox = gameText;
 
 }
