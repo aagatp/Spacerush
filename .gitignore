@@ -1,5 +1,6 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs/SpaceRush/v16/Browse.VC.opendb
+﻿
+/Debug/
+/.vs/
+/SpaceRush/Debug/
+/SpaceRush/*.dll
+/SpaceRush/SpaceRush.vcxproj.user
