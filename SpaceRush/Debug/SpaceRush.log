@@ -1,0 +1,14 @@
+﻿  world.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(5,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(33,40): warning C4305: 'argument': truncation from 'double' to 'T'
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(33,40): warning C4305:         with
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(33,40): warning C4305:         [
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(33,40): warning C4305:             T=float
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(33,40): warning C4305:         ]
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(37,28): warning C4305: 'argument': truncation from 'double' to 'T'
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(37,28): warning C4305:         with
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(37,28): warning C4305:         [
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(37,28): warning C4305:             T=float
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(37,28): warning C4305:         ]
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.cpp(61): warning C4715: 'World::checkGameStatus': not all control paths return a value
+  SpaceRush.vcxproj -> C:\Users\A\Desktop\ESH\SpaceRush\Debug\SpaceRush.exe
