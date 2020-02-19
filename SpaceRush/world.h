@@ -16,8 +16,12 @@ public:
 	sf::RenderWindow& window;
 	void handleInputs(const sf::Time& dt);
 private:
-	sf::Vector2f getPositionAircraft();
-	float rotation;
+	//sf::Vector2f getPositionAircraft();
+
+	sf::Vector2f direction;
+	sf::Vector2f velocity;
+	sf::Vector2f acceleration;
+
 	sf::Time time;
 	
 	sf::View mWorldView;
