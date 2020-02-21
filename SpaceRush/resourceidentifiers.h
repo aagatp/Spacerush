@@ -12,12 +12,12 @@ namespace Textures
 	enum ID
 	{
 		Space,
-		Player1Aircraft,
-		Player2Aircraft,
-		Player1Fire,
-		Player2Fire,
-		Player1Missile,
-		Player2Missile,
+		BlueSpaceship,
+		RedSpaceship,
+		BlueBullet,
+		RedBullet,
+		BlueMissile,
+		RedMissile,
 		Explosion,
 		Asteriods,
 		CollectPickup,

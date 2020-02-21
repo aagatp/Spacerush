@@ -144,26 +144,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="spaceship.cpp" />
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="button.cpp" />
-    <ClCompile Include="controls.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameover.cpp" />
     <ClCompile Include="gameplay.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
-    <ClCompile Include="multiplayer.cpp" />
     <ClCompile Include="scenemanager.cpp" />
     <ClCompile Include="textbox.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="functions.h" />
+    <ClInclude Include="spaceship.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="button.h" />
-    <ClInclude Include="controls.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameover.h" />
     <ClInclude Include="gameplay.h" />
     <ClInclude Include="menu.h" />
-    <ClInclude Include="multiplayer.h" />
     <ClInclude Include="resourceholder.h" />
     <ClInclude Include="resourceidentifiers.h" />
     <ClInclude Include="scene.h" />

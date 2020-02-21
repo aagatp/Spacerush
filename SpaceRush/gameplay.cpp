@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "gameover.h"
 
-GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window)
-    : Scene{sceneManager, window}, mWorld(window),gamePlay(0)
+GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window, int shipId)
+    : Scene{sceneManager, window},shipId(shipId), mWorld(window,shipId),gamePlay(0)
 {
     window.setMouseCursorVisible(true);
     float screenWidgth = window.getSize().x;
@@ -47,7 +47,7 @@ void GamePlay::update(const sf::Time& dt)
         {
             gamePlay = 2;
         }
-        mWorld.handleInputs(dt);
+        mWorld.handleInputs();
     }
     else
     {

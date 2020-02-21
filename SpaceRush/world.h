@@ -3,33 +3,32 @@
 #include <SFML/Window.hpp>
 #include "resourceholder.h"
 #include "resourceidentifiers.h"
+#include "spaceship.h"
+#include "bullet.h"
 
 class World
 {
 public:
-	World(sf::RenderWindow& window);
+	World(sf::RenderWindow& window, int shipId);
 	void draw();
 	void update(sf::Time dt);
 	int checkGameStatus();
-	void moveAircraft(float x, float y);
-	void lookAtMouse(sf::Sprite&);
+	void lookAtMouse();
 	sf::RenderWindow& window;
-	void handleInputs(const sf::Time& dt);
+	void handleInputs();
 private:
-	//sf::Vector2f getPositionAircraft();
-
+	void fireBullets();
+	int shipId;
+	sf::View mWorldView;
 	sf::Vector2f direction;
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
-
 	sf::Time time;
-	
-	sf::View mWorldView;
 	TextureHolder textures;
-	std::vector <sf::Sprite> firstPlayerSprite;
+	std::vector<std::shared_ptr<Spaceship>>spaceships;
+	std::vector<std::shared_ptr<Bullet>>bullets;
 	sf::Sprite asteriod;
-	sf::Sprite finishLine;
-	bool firstPlayer, secondPlayer;
-	
+	sf::Sprite finishLine;	
+	static float clickrate;
 };
 

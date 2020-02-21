@@ -120,7 +120,7 @@ void Menu::update(const sf::Time& dt)
 {
 	if (startGame == true)
 	{
-		std::unique_ptr<Scene> gamePlay(new GamePlay(sceneManager, window));
+		std::unique_ptr<Scene> gamePlay(new GamePlay(sceneManager, window, shipId));
 		sceneManager.changeScene(std::move(gamePlay));
 	}
 	else {
@@ -195,11 +195,15 @@ void Menu::update(const sf::Time& dt)
 				{
 					window.setMouseCursorVisible(true);
 					startGame = true;
+					shipId = 0;
 				}
 				else
 				{
 					if (isSelected[4])
+					{
 						startGame = true;
+						shipId = 1;
+					}
 					else
 					{
 						if (isSelected[5])

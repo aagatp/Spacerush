@@ -23,6 +23,7 @@ public:
     void update(const sf::Time& dt);
     void draw();
 private:
+    int shipId;
     sf::Sprite bgSprite;
     sf::Font mFont;
     std::vector<Button::buttonPtr>mButtons;
