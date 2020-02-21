@@ -10,20 +10,19 @@ class Spaceship
 public:
     Spaceship(int);
 
-    void destroy(); //Destroys the tank
 
-    sf::Vector2f getPosition(); //Returns the current position of the tank
-    void setPosition(sf::Vector2f); //Sets the tank to the current position
+    sf::Vector2f getPosition(); 
+    void setPosition(sf::Vector2f); 
 
     sf::FloatRect getBounds(); //Returns the bounding box to check collision
 
-    void decreaseHealth(int); //Decrease the health of the player by given amount
-    unsigned int getHealth(); //Returns the current health
-    void setHealth(unsigned int); //Set the health to this value
+    void decreaseHealth(int); 
+    unsigned int getHealth(); 
+    void setHealth(unsigned int); //Set the health bar to this value
 
-    bool checkDestroyed(); //check if the tank has been destroyed 
+    bool checkDestroyed(); 
 
-    void move(sf::Vector2f); //move the tank to specific direction
+    void move(sf::Vector2f); 
     float getAngle();
     void setAngle(float);
     void render(sf::RenderTarget& l_window);

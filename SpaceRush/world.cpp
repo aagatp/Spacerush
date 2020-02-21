@@ -1,10 +1,11 @@
 #include "world.h"
 #include <iostream>
-#include "functions.h"
+#include "functions.h" //utility functions library
 
-float World::clickrate = 0;
+float World::clickrate = 0; // To limit clicks in a mouse
 World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 {
+	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
 	textures.load(Textures::Asteriods, "Assets/asteriod.png");
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
 	
@@ -30,7 +31,8 @@ void World::update(sf::Time dt)
 	acceleration = function::normalize(direction);
 	lookAtMouse();
 	spaceships[shipId]->move(velocity);
-	fireBullets();
+	
+	fireBullets(); //execution code for firing bullet if bullet exists.
 
 	//Damp velocity Every frame
 	velocity *= 0.99f;
@@ -58,15 +60,18 @@ void World::lookAtMouse()
 
 void World::handleInputs()
 {
-	clickrate++;
+	clickrate++; // increases until it reaches 60
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		velocity += acceleration * time.asSeconds();
 	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
+		/*handleInputs() function is running at 1/60 sec, so to limit clickrate we execute 
+		only when a full second is completed. so mouseclick is 1 click per second*/
 		if (clickrate > 60)
 		{
+			// making new bullets and passing to the bullets vector
 			auto newbullet = std::make_shared<Bullet>(shipId, spaceships[shipId]->getPosition(), function::normalize(direction));
 			bullets.push_back(newbullet);
 			clickrate = 0;
@@ -76,6 +81,7 @@ void World::handleInputs()
 }
 void World::fireBullets()
 {
+	//logic for bullet firing. under construction....
 	for (auto bullet = bullets.begin(); bullet != bullets.end();) {
 		if ((*bullet)->isOutOfBounds())
 			bullet = bullets.erase(bullet);
@@ -95,5 +101,4 @@ void World::draw()
 	for (auto bullet : bullets) 
 		bullet->render(window);
 	window.draw(asteriod);
-	window.display();
 }

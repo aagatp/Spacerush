@@ -60,4 +60,5 @@ void GamePlay::draw() {
     window.clear(sf::Color::Black);
     window.draw(bgSprite);
     mWorld.draw();
+    window.display();
 }

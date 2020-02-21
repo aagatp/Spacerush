@@ -2,7 +2,7 @@
 Spaceship::Spaceship(int a):m_playerid(a),m_angle(0)
 {
     healthbar.setSize({ static_cast<float>(m_health), 15 });
-    healthbar.setFillColor(sf::Color::Cyan);
+
     healthbar.setOutlineColor(sf::Color::White);
     healthbar.setOutlineThickness(2);
     if (a == 0)
@@ -13,6 +13,7 @@ Spaceship::Spaceship(int a):m_playerid(a),m_angle(0)
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
+        healthbar.setFillColor(sf::Color::Blue);
         spaceship.setPosition({500,500});
         healthbar.setPosition(100, 1000);
     }
@@ -24,6 +25,7 @@ Spaceship::Spaceship(int a):m_playerid(a),m_angle(0)
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
+        healthbar.setFillColor(sf::Color::Red);
         spaceship.setPosition({ 800, 800 });
         healthbar.setPosition(900, 1000);
     }
@@ -31,7 +33,6 @@ Spaceship::Spaceship(int a):m_playerid(a),m_angle(0)
     
 }
 
-void Spaceship::destroy() { m_destroyed = true; }
 
 void Spaceship::move(sf::Vector2f pos)
 {
@@ -48,7 +49,7 @@ void Spaceship::decreaseHealth(int amount)
 {
     if (m_health <= 10)
     {
-        destroy();
+        m_destroyed = true;
     }
     m_health = m_health - amount;
     healthbar.setSize({ static_cast<float>(m_health), 15 });

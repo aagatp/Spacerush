@@ -13,6 +13,7 @@ public:
     void setAttributes(const std::string& text, int size, sf::Font& font);
     sf::FloatRect getGlobalBounds();
     void setColor(const sf::Color color);
+    int getSize();
 
 private:
     sf::Vector2f m_position;

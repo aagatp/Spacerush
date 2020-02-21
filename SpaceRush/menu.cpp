@@ -25,33 +25,33 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
     sf::Font& mFont = fontholder.get(Fonts::Game);
 
 	auto playBtn = std::make_shared<Button>();
-	playBtn->setAttributes("Play", 24, mFont);
-	playBtn->setPos({ screenWidgth/2-40,600 });
+	playBtn->setAttributes("Play", 40, mFont);
+	playBtn->setPos({ screenWidgth/2-playBtn->getSize()/2,600 });
 	playBtn->setColor(sf::Color::White);
 
 	auto aboutBtn = std::make_shared<Button>();
-	aboutBtn->setAttributes("About", 24, mFont);
-	aboutBtn->setPos({ screenWidgth / 2-40,700 });
+	aboutBtn->setAttributes("About", 40, mFont);
+	aboutBtn->setPos({ screenWidgth / 2-aboutBtn->getSize() / 2,700 });
 	aboutBtn->setColor(sf::Color::White);
 
 	auto exitBtn = std::make_shared<Button>();
-	exitBtn->setAttributes("Exit", 24, mFont);
-	exitBtn->setPos({ screenWidgth / 2-40,800 });
+	exitBtn->setAttributes("Exit", 40, mFont);
+	exitBtn->setPos({ screenWidgth / 2-exitBtn->getSize() / 2,800 });
 	exitBtn->setColor(sf::Color::White);
 
 	auto joinBtn = std::make_shared<Button>();
-	joinBtn->setAttributes("Join Game", 24, mFont);
-	joinBtn->setPos({ screenWidgth / 2-40,600 });
+	joinBtn->setAttributes("Join Game", 40, mFont);
+	joinBtn->setPos({ screenWidgth / 2-joinBtn->getSize()/2,600 });
 	joinBtn->setColor(sf::Color::White);
 	
 	auto hostBtn = std::make_shared<Button>();
-	hostBtn->setAttributes("Host Game", 24, mFont);
-	hostBtn->setPos({ screenWidgth / 2-40,700 });
+	hostBtn->setAttributes("Host Game", 40, mFont);
+	hostBtn->setPos({ screenWidgth / 2-hostBtn->getSize() / 2,700 });
 	hostBtn->setColor(sf::Color::White);
 
 	auto backBtn = std::make_shared<Button>();
-	backBtn->setAttributes("Back", 24, mFont);
-	backBtn->setPos({ screenWidgth-300,screenHeight-100});
+	backBtn->setAttributes("Back", 40, mFont);
+	backBtn->setPos({ screenWidgth-100-backBtn->getSize(),screenHeight-100});
 	backBtn->setColor(sf::Color::White);
 
 	mButtons.push_back(playBtn);
@@ -62,17 +62,17 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	mButtons.push_back(backBtn);
 
 	auto titleText = std::make_shared<TextBox>();
-	titleText->setAttributes("Space Rush", 38, mFont);
-	titleText->setPos({ screenWidgth / 2 - 150,200 });
+	titleText->setAttributes("Space Rush", 100, mFont);
+	titleText->setPos({ screenWidgth / 2 - titleText->getSize()/2,250 });
 	titleText->setColor(sf::Color::Red);
 	
 	auto readText = std::make_shared<TextBox>();
-	readText->setAttributes("The game involves a race between two Spaceships",24, mFont);
+	readText->setAttributes("The game involves a race between two Spaceships",35, mFont);
 	readText->setPos({100,700});
 	readText->setColor(sf::Color::White);
 
 	auto creditsText = std::make_shared<TextBox>();
-	readText->setAttributes("Developed with lots of love and code.", 24, mFont);
+	readText->setAttributes("Developed with lots of love and code.", 35, mFont);
 	readText->setPos({ 100,800});
 	readText->setColor(sf::Color::White);
 
@@ -120,6 +120,7 @@ void Menu::update(const sf::Time& dt)
 {
 	if (startGame == true)
 	{
+		//shipId is 0 if game is hosted and 1 if it is joined.
 		std::unique_ptr<Scene> gamePlay(new GamePlay(sceneManager, window, shipId));
 		sceneManager.changeScene(std::move(gamePlay));
 	}

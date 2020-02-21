@@ -2,7 +2,7 @@
 #include "scene.h"
 #include "scenemanager.h"
 #include "world.h" 
-//#include "controls.h"
+
 class GamePlay :
 	public Scene
 {
@@ -16,7 +16,6 @@ public:
 private:
     int shipId;
     World mWorld;
-    /*Controls mControl;*/
     sf::Sprite bgSprite;
     int gamePlay;
 };

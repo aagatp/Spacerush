@@ -12,7 +12,6 @@ void Button::setAttributes(const std::string& text, int size, sf::Font& font)
     mText.setFont(font);
 }
 
-
 void Button::render(sf::RenderTarget& renderer)
 {
     renderer.draw(mText);
@@ -30,4 +29,8 @@ void Button::setPos(const sf::Vector2f& pos)
 {
     m_position = pos;
     mText.setPosition(m_position);
+}
+int Button::getSize()
+{
+    return mText.getGlobalBounds().width;
 }

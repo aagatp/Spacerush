@@ -12,7 +12,7 @@ public:
     void setPos(const sf::Vector2f& pos)   override;
     void setAttributes(const std::string& text, int size, sf::Font& font);
     void setColor(const sf::Color color);
-
+    int getSize();
 private:
     sf::Vector2f m_position;
     sf::Text m_textbox;

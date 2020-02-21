@@ -27,3 +27,7 @@ void TextBox::setPos(const sf::Vector2f& pos)
     m_position = pos;
     m_textbox.setPosition(m_position);
 }
+int TextBox::getSize()
+{
+    return m_textbox.getGlobalBounds().width;
+}
