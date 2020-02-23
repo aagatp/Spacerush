@@ -9,6 +9,8 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	textures.load(Textures::Asteriods, "Assets/asteriod.png");
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
 	
+	Bullet::loadTextures();
+
 	auto blueship = std::make_shared<Spaceship>(0);
 	auto redship = std::make_shared<Spaceship>(1);
 	spaceships.push_back(blueship);

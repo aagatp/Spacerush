@@ -17,9 +17,13 @@ public:
 
     void move(sf::Vector2f); //Move the bullet in the direction
     bool isOutOfBounds();
+
+	static void loadTextures();
+
 private:
+
     sf::Sprite bullet;
-    TextureHolder bulletTex;
+    static TextureHolder bulletTex;
 
     int shipId;
     sf::Vector2f ship_position;

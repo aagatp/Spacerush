@@ -9,12 +9,12 @@ Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction
     bullet.setPosition(ship_position);
     if (shipId == 0)
     {
-        bulletTex.load(Textures::BlueBullet, "Assets/bluebullet.png");
+       
         bullet.setTexture(bulletTex.get(Textures::BlueBullet));
     }
     if (shipId== 1)
     {
-        bulletTex.load(Textures::RedBullet, "Assets/redbullet.png");
+        
         bullet.setTexture(bulletTex.get(Textures::RedBullet));
     }
     bullet.scale({ 0.5,0.5 });
@@ -55,6 +55,15 @@ bool Bullet::isOutOfBounds()
     }
     return false;
 }
+
+void Bullet::loadTextures()
+{
+	bulletTex.load(Textures::BlueBullet, "Assets/bluebullet.png");
+	bulletTex.load(Textures::RedBullet, "Assets/redbullet.png");
+}
+
+TextureHolder Bullet::bulletTex;
+
 void Bullet::render(sf::RenderTarget& l_window)
 {
     l_window.draw(bullet);
