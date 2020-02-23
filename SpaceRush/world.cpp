@@ -30,13 +30,15 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 void World::update(sf::Time dt)
 {
 	time = dt;
-	acceleration = function::normalize(direction);
+
+	//Float value to control how fast the spaceship accelerates
+	acceleration = 2.f * function::normalize(direction);
 	lookAtMouse();
 	spaceships[shipId]->move(velocity);
 	
 	fireBullets(); //execution code for firing bullet if bullet exists.
 
-	//Damp velocity Every frame
+	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
 
 	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 50);
