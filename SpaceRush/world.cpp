@@ -1,24 +1,35 @@
 #include "world.h"
 #include <iostream>
 #include "functions.h" //utility functions library
+#include "collision.h"
 
+int World::count = 0;
 float World::clickrate = 0; // To limit clicks in a mouse
 World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 {
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
-	textures.load(Textures::Asteriods, "Assets/asteriod.png");
-	textures.load(Textures::FinishLine, "Assets/finishline.png");
+	count++;
+	loadTextures();
 	
-	Bullet::loadTextures();
+	for (int i = 0; i < 2; i++)
+	{
+		if (i == shipId)
+			continue;
+		otherId = i;
+	}
 
 	auto blueship = std::make_shared<Spaceship>(0);
 	auto redship = std::make_shared<Spaceship>(1);
 	spaceships.push_back(blueship);
 	spaceships.push_back(redship);
 
-	asteriod.setTexture(textures.get(Textures::Asteriods));
+	/*asteriod.setTexture(textures.get(Textures::Asteriods));
 	asteriod.setPosition({100,500});
-	asteriod.scale({ 0.3,0.3 });
+	asteriod.scale({ 0.3,0.3 });*/
+
+	for (int i = 0; i < 5; i++) {
+		asteroids.push_back(std::make_shared<Asteroid>());
+	}
 
 	finishLine.setTexture(textures.get(Textures::FinishLine));
 	finishLine.setPosition({0,-200});
@@ -36,8 +47,11 @@ void World::update(sf::Time dt)
 	lookAtMouse();
 	spaceships[shipId]->move(velocity);
 	
-	fireBullets(); //execution code for firing bullet if bullet exists.
+	checkCollision();//checks collision between spaceship and asteriods;
 
+	fireBullets(300.f); //execution code for firing bullet if bullet exists.
+	for (auto asteroid : asteroids)
+		asteroid->update(time);
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
 
@@ -47,9 +61,13 @@ void World::update(sf::Time dt)
 int World::checkGameStatus()
 {
 	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()))
+	{
 		return 1;
-	else if (spaceships[shipId]->getHealth()<=0)
+	}
+	else if (spaceships[shipId]->getHealth() <= 0)
+	{
 		return 2;
+	}
 }
 
 void World::lookAtMouse()
@@ -73,7 +91,7 @@ void World::handleInputs()
 	{
 		/*handleInputs() function is running at 1/60 sec, so to limit clickrate we execute 
 		only when a full second is completed. so mouseclick is 1 click per second*/
-		if (clickrate > 60)
+		if (clickrate > 30)
 		{
 			// making new bullets and passing to the bullets vector
 			auto newbullet = std::make_shared<Bullet>(shipId, spaceships[shipId]->getPosition(), function::normalize(direction));
@@ -83,16 +101,49 @@ void World::handleInputs()
 	}
 
 }
-void World::fireBullets()
+void World::fireBullets(float speedOfBullet)
 {
 	//logic for bullet firing. under construction....
 	for (auto bullet = bullets.begin(); bullet != bullets.end();) {
 		if ((*bullet)->isOutOfBounds())
 			bullet = bullets.erase(bullet);
+		else if (Collision::PixelPerfectTest(spaceships[otherId], *bullet))
+		{
+			bullet = bullets.erase(bullet);
+			spaceships[otherId]->decreaseHealth(1);
+		}
 		else
 		{
-			(*bullet)->move(100.f * (*bullet)->getDirection() * time.asSeconds());
+			(*bullet)->move(speedOfBullet * (*bullet)->getDirection() * time.asSeconds());
 			bullet++;
+		}
+
+		/*for (auto& asteroid : asteroids)
+		{
+			if (Collision::PixelPerfectTest(asteroid, (*bullet)))
+			{
+				bullet = bullets.erase(bullet);
+				asteroid->decreaseHealth(1);
+			}
+		}*/
+	}
+}
+void World::checkCollision()
+{
+	if (shipId == 0)
+	{
+		if (Collision::PixelPerfectTest(spaceships[shipId], spaceships[otherId]))
+		{
+			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			spaceships[otherId]->setPosition(spaceships[otherId]->getPosition() + sf::Vector2f{ 20,0 });
+		}
+	}
+	for (auto& asteroid : asteroids)
+	{
+		if (Collision::PixelPerfectTest(spaceships[shipId], asteroid))
+		{
+			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			spaceships[shipId]->decreaseHealth(2);
 		}
 	}
 }
@@ -104,5 +155,16 @@ void World::draw()
 		spaceship->render(window);
 	for (auto bullet : bullets) 
 		bullet->render(window);
-	window.draw(asteriod);
+	for (auto asteroid : asteroids)
+		asteroid->render(window);
+}
+
+void World::loadTextures()
+{
+	textures.load(Textures::FinishLine, "Assets/finishline.png");
+	if (count==1)
+	{
+		Asteroid::loadTextures();
+		Bullet::loadTextures();
+	}
 }

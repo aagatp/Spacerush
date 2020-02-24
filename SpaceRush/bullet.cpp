@@ -74,3 +74,15 @@ sf::FloatRect Bullet::getBounds()
 {
 	return bullet.getGlobalBounds();
 }
+sf::IntRect Bullet::getTextureRect()
+{
+	return bullet.getTextureRect();
+}
+const sf::Texture* Bullet::getTexture()
+{
+	return bullet.getTexture();
+}
+const sf::Transform Bullet::getInverseTransform()
+{
+	return bullet.getInverseTransform();
+}

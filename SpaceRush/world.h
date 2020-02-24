@@ -5,6 +5,7 @@
 #include "resourceidentifiers.h"
 #include "spaceship.h"
 #include "bullet.h"
+#include "asteroids.h"
 
 class World
 {
@@ -16,9 +17,12 @@ public:
 	void lookAtMouse();
 	sf::RenderWindow& window;
 	void handleInputs();
+	static int count;
 private:
-	void fireBullets();
-	int shipId;
+	void checkCollision();
+	void fireBullets(float);
+	int shipId,otherId;
+	void loadTextures();
 	sf::View mWorldView;
 	sf::Vector2f direction;
 	sf::Vector2f velocity;
@@ -27,7 +31,8 @@ private:
 	TextureHolder textures;
 	std::vector<std::shared_ptr<Spaceship>>spaceships;
 	std::vector<std::shared_ptr<Bullet>>bullets;
-	sf::Sprite asteriod;
+	std::vector<std::shared_ptr<Asteroid>>asteroids;
+	//sf::Sprite asteriod;
 	sf::Sprite finishLine;	
 	static float clickrate;
 };

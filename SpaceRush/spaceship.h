@@ -5,6 +5,7 @@
 #include <iostream>
 #include "resourceholder.h"
 #include "resourceidentifiers.h"
+//#include "animation.h"
 class Spaceship
 {
 public:
@@ -26,6 +27,9 @@ public:
     float getAngle();
     void setAngle(float);
     void render(sf::RenderTarget& l_window);
+    sf::IntRect getTextureRect();
+    const sf::Texture* getTexture();
+    const sf::Transform getInverseTransform();
 private:
 
     sf::RectangleShape healthbar;
@@ -34,7 +38,7 @@ private:
     float m_angle;
 
     sf::Vector2f m_position;
-
+    //Animation animation;
     int m_playerid;
     unsigned int m_health = 100;
     bool m_destroyed = false;

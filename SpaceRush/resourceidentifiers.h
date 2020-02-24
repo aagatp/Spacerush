@@ -19,7 +19,7 @@ namespace Textures
 		BlueMissile,
 		RedMissile,
 		Explosion,
-		Asteriods,
+		Asteroids,
 		CollectPickup,
 		FinishLine,
 	};

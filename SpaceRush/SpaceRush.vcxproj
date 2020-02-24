@@ -144,6 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="animation.cpp" />
+    <ClCompile Include="asteroids.cpp" />
+    <ClCompile Include="collision.cpp" />
     <ClCompile Include="spaceship.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="button.cpp" />
@@ -157,6 +160,9 @@
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation.h" />
+    <ClInclude Include="asteroids.h" />
+    <ClInclude Include="collision.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="spaceship.h" />
     <ClInclude Include="bullet.h" />

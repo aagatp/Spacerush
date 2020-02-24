@@ -19,6 +19,9 @@ public:
     bool isOutOfBounds();
 
 	static void loadTextures();
+    sf::IntRect getTextureRect();
+    const sf::Texture* getTexture();
+    const sf::Transform getInverseTransform();
 
 private:
 

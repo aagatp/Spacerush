@@ -15,6 +15,7 @@ class ResourceHolder
 public:
 	void load(Identifier id, const std::string& filename);
 	Resource& get(Identifier id);
+	//bool check(Identifier id);
 
 private:
 	void insertResource(Identifier id, std::unique_ptr<Resource> resource);
@@ -41,6 +42,7 @@ Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 
 	return *found->second;
 }
+
 
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::insertResource(Identifier id, std::unique_ptr<Resource> resource)
