@@ -23,7 +23,7 @@ Asteroid::Asteroid() {
 	scale = static_cast<float> (random(25, 50));
 	scale /= 100;
 
-	position = sf::Vector2f(random(0, 1000), random(0, 1000));
+	position = sf::Vector2f(random(0, 960), random(-3000, 1000));
 	velocity = sf::Vector2f(random(0, 1000) / 1000.f, random(0, 1000) / 1000.f);
 	velocity *= 10.f;
 	direction = sf::Vector2f(random(0, 1000), random(0, 1000));

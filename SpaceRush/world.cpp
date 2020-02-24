@@ -27,12 +27,13 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	asteriod.setPosition({100,500});
 	asteriod.scale({ 0.3,0.3 });*/
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 25; i++) {
 		asteroids.push_back(std::make_shared<Asteroid>());
 	}
 
 	finishLine.setTexture(textures.get(Textures::FinishLine));
-	finishLine.setPosition({0,-200});
+	float height = window.getSize().x * 2;
+	finishLine.setPosition({0,-height});
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
@@ -52,10 +53,10 @@ void World::update(sf::Time dt)
 	fireBullets(300.f); //execution code for firing bullet if bullet exists.
 	updateAsteroids();
 	checkPickups();
+	
+	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
-
-	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 50);
 }
 
 int World::checkGameStatus()
@@ -112,7 +113,7 @@ void World::fireBullets(float speedOfBullet)
 		else if (Collision::PixelPerfectTest(spaceships[otherId], *bullet))
 		{
 			bullet = bullets.erase(bullet);
-			spaceships[otherId]->decreaseHealth(1);
+			spaceships[otherId]->decreaseHealth(2);
 		}
 		else if (checkAsteroidCollision(*bullet))
 		{
@@ -172,7 +173,7 @@ void World::checkCollision()
 		if (Collision::PixelPerfectTest(spaceships[shipId], asteroid))
 		{
 			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
-			spaceships[shipId]->decreaseHealth(2);
+			spaceships[shipId]->decreaseHealth(1);
 		}
 	}
 	
