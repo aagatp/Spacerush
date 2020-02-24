@@ -146,7 +146,11 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="asteroids.cpp" />
+    <ClCompile Include="client.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="entrybox.cpp" />
+    <ClCompile Include="pickup.cpp" />
+    <ClCompile Include="server.cpp" />
     <ClCompile Include="spaceship.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="button.cpp" />
@@ -162,8 +166,12 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="asteroids.h" />
+    <ClInclude Include="client.h" />
     <ClInclude Include="collision.h" />
+    <ClInclude Include="entrybox.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="pickup.h" />
+    <ClInclude Include="server.h" />
     <ClInclude Include="spaceship.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="button.h" />

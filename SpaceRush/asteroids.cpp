@@ -63,11 +63,18 @@ const sf::Transform Asteroid::getInverseTransform()
 void Asteroid::decreaseHealth(int a)
 {
 	mHealth = mHealth - a;
-	//if (mHealth <= 0)
-	//{
-	//	//destroy to create pickup.
-	//}
 }
+bool Asteroid::isDestroyed()
+{
+	if (mHealth <= 0)
+		return true;
+	return false;
+}
+const sf::Vector2f Asteroid::getPosition()
+{
+	return asteroid.getPosition();
+}
+
 
 sf::FloatRect Asteroid::getBounds()
 {

@@ -1,6 +1,7 @@
 #include "asteroids.h"
 #include "spaceship.h"
 #include "bullet.h"
+#include "pickup.h"
 namespace Collision {
     //////
     /// Test for a collision between two sprites by comparing the alpha values of overlapping pixels
@@ -16,4 +17,5 @@ namespace Collision {
     bool PixelPerfectTest(std::shared_ptr<Spaceship>& sp1, std::shared_ptr< Bullet>& b, sf::Uint8 AlphaLimit = 0);
     bool PixelPerfectTest(std::shared_ptr<Spaceship>& sp1, std::shared_ptr<Asteroid>& as, sf::Uint8 AlphaLimit = 0);
     bool PixelPerfectTest(std::shared_ptr<Asteroid>& as, std::shared_ptr< Bullet>& b, sf::Uint8 AlphaLimit = 0);
+    bool PixelPerfectTest(std::shared_ptr<Spaceship>& sp1, sf::Sprite& p, sf::Uint8 AlphaLimit = 0);
 }

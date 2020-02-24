@@ -36,6 +36,8 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
+
+	manageConnection();
 }
 
 void World::update(sf::Time dt)
@@ -46,12 +48,10 @@ void World::update(sf::Time dt)
 	acceleration = 2.f * function::normalize(direction);
 	lookAtMouse();
 	spaceships[shipId]->move(velocity);
-	
 	checkCollision();//checks collision between spaceship and asteriods;
-
 	fireBullets(300.f); //execution code for firing bullet if bullet exists.
-	for (auto asteroid : asteroids)
-		asteroid->update(time);
+	updateAsteroids();
+	checkPickups();
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
 
@@ -106,26 +106,55 @@ void World::fireBullets(float speedOfBullet)
 	//logic for bullet firing. under construction....
 	for (auto bullet = bullets.begin(); bullet != bullets.end();) {
 		if ((*bullet)->isOutOfBounds())
+		{
 			bullet = bullets.erase(bullet);
+		}
 		else if (Collision::PixelPerfectTest(spaceships[otherId], *bullet))
 		{
 			bullet = bullets.erase(bullet);
 			spaceships[otherId]->decreaseHealth(1);
 		}
+		else if (checkAsteroidCollision(*bullet))
+		{
+			bullet = bullets.erase(bullet);
+		}
 		else
 		{
 			(*bullet)->move(speedOfBullet * (*bullet)->getDirection() * time.asSeconds());
 			bullet++;
-		}
-
-		/*for (auto& asteroid : asteroids)
+		}	
+	}
+	
+}
+void World::updateAsteroids()
+{
+	for (auto asteroid = asteroids.begin(); asteroid != asteroids.end();)
+	{
+		if (!(*asteroid)->isDestroyed())
 		{
-			if (Collision::PixelPerfectTest(asteroid, (*bullet)))
-			{
-				bullet = bullets.erase(bullet);
-				asteroid->decreaseHealth(1);
-			}
-		}*/
+			(*asteroid)->update(time);
+			asteroid++;
+		}
+		else
+		{
+			pickups.push_back(std::make_shared<Pickup>((*asteroid)->getPosition()));
+			asteroid = asteroids.erase(asteroid);
+		}
+	}
+}
+void World::checkPickups()
+{
+	for (auto pickup = pickups.begin(); pickup != pickups.end();)
+	{
+		if ((*pickup)->isGrabbed(spaceships[shipId]))
+		{
+			spaceships[shipId]->setHealth(15);
+			pickup = pickups.erase(pickup);
+		}
+		else
+		{
+			pickup++;
+		}
 	}
 }
 void World::checkCollision()
@@ -146,6 +175,19 @@ void World::checkCollision()
 			spaceships[shipId]->decreaseHealth(2);
 		}
 	}
+	
+}
+bool World::checkAsteroidCollision(std::shared_ptr<Bullet>& bullet)
+{
+	for (auto& asteroid : asteroids)
+	{
+		if (Collision::PixelPerfectTest(asteroid, bullet))
+		{
+			asteroid->decreaseHealth(1);
+			return true;
+		}
+	}
+	return false;
 }
 void World::draw()
 {
@@ -157,6 +199,8 @@ void World::draw()
 		bullet->render(window);
 	for (auto asteroid : asteroids)
 		asteroid->render(window);
+	for (auto pickup : pickups)
+		pickup->render(window);
 }
 
 void World::loadTextures()
@@ -166,5 +210,16 @@ void World::loadTextures()
 	{
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
+	}
+}
+void World::manageConnection()
+{
+	if (shipId == 0)
+	{
+
+	}
+	else
+	{
+
 	}
 }

@@ -6,6 +6,7 @@
 #include "spaceship.h"
 #include "bullet.h"
 #include "asteroids.h"
+#include "pickup.h"
 
 class World
 {
@@ -19,7 +20,11 @@ public:
 	void handleInputs();
 	static int count;
 private:
+	void manageConnection();
+	void checkPickups();
 	void checkCollision();
+	bool checkAsteroidCollision(std::shared_ptr<Bullet>&);
+	void updateAsteroids();
 	void fireBullets(float);
 	int shipId,otherId;
 	void loadTextures();
@@ -32,6 +37,7 @@ private:
 	std::vector<std::shared_ptr<Spaceship>>spaceships;
 	std::vector<std::shared_ptr<Bullet>>bullets;
 	std::vector<std::shared_ptr<Asteroid>>asteroids;
+	std::vector < std::shared_ptr<Pickup>>pickups;
 	//sf::Sprite asteriod;
 	sf::Sprite finishLine;	
 	static float clickrate;

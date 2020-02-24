@@ -17,6 +17,8 @@ public:
 	const sf::Transform getInverseTransform();
 	sf::FloatRect getBounds();
 	void decreaseHealth(int);
+	bool isDestroyed();
+	const sf::Vector2f getPosition();
 private:
 	static TextureHolder asteriodsTex;
 	static int screenWidth;
