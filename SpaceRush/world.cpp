@@ -10,7 +10,9 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
 	count++;
 	loadTextures();
-	
+	sf::Cursor cursor;
+	if (cursor.loadFromSystem(sf::Cursor::Cross))
+		window.setMouseCursor(cursor);
 	for (int i = 0; i < 2; i++)
 	{
 		if (i == shipId)

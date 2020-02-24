@@ -41,14 +41,14 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 
 	auto joinBtn = std::make_shared<Button>();
 	joinBtn->setAttributes("Join Game", 40, mFont);
-	joinBtn->setPos({ screenWidgth / 2-joinBtn->getSize()/2,600 });
+	joinBtn->setPos({ screenWidgth / 2 - joinBtn->getSize() / 2,700 });
 	joinBtn->setColor(sf::Color::White);
 	
 	auto hostBtn = std::make_shared<Button>();
 	hostBtn->setAttributes("Host Game", 40, mFont);
-	hostBtn->setPos({ screenWidgth / 2-hostBtn->getSize() / 2,700 });
+	hostBtn->setPos({ screenWidgth / 2 - hostBtn->getSize() / 2, 600 });
 	hostBtn->setColor(sf::Color::White);
-
+	
 	auto backBtn = std::make_shared<Button>();
 	backBtn->setAttributes("Back", 40, mFont);
 	backBtn->setPos({ screenWidgth-100-backBtn->getSize(),screenHeight-100});
@@ -57,8 +57,8 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	mButtons.push_back(playBtn);
 	mButtons.push_back(aboutBtn);
 	mButtons.push_back(exitBtn);
-	mButtons.push_back(joinBtn);
 	mButtons.push_back(hostBtn);
+	mButtons.push_back(joinBtn);
 	mButtons.push_back(backBtn);
 
 	auto titleText = std::make_shared<TextBox>();

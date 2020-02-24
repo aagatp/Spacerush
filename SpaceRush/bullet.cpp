@@ -4,6 +4,7 @@
 Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction)
 	:shipId(playerid)
 {
+	yAxisLife = 0;
 	m_direction = direction;
 	ship_position = l_shipposition;
 	bullet.setPosition(ship_position);
@@ -21,7 +22,7 @@ Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction
 			bullet.getGlobalBounds().height / 2 + bullet.getOrigin().y
 		});
 
-	bullet.scale({ 0.5,0.5 });
+	bullet.scale({ 0.7,0.7 });
 
 	bullet.setRotation((atan2(direction.y, direction.x)) * 180 / 3.14159265 - 90);
 }
@@ -36,6 +37,7 @@ void Bullet::setPosition(sf::Vector2f initial_position)
 
 void Bullet::move(sf::Vector2f position)
 {
+	yAxisLife++;
 	bullet.move(-position);
 }
 
@@ -50,7 +52,7 @@ sf::Vector2f Bullet::getDirection()
 }
 bool Bullet::isOutOfBounds()
 {
-	if (bullet.getPosition().x > 800 || bullet.getPosition().x < 10)
+	if (bullet.getPosition().x > 960|| bullet.getPosition().x < 5 || yAxisLife>1000)
 	{
 		return true;
 	}

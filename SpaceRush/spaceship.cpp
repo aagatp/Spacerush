@@ -14,8 +14,8 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
         healthbar.setFillColor(sf::Color::Blue);
-        spaceship.setPosition({500,500});
-        healthbar.setPosition(450, 600);
+        spaceship.setPosition({100,500});
+        healthbar.setPosition(50, 600);
     }
     if (a == 1)
     {
@@ -26,8 +26,8 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
         healthbar.setFillColor(sf::Color::Red);
-        spaceship.setPosition({ 800, 800 });
-        healthbar.setPosition(750, 900);
+        spaceship.setPosition({ 800, 500});
+        healthbar.setPosition(750, 600);
     }
     spaceship.scale({ 0.3,0.3 });
 }

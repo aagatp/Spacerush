@@ -15,6 +15,9 @@ public:
         : sceneManager{ m_sceneManager }
         , window{ m_window } 
     {
+        sf::Cursor cursor;
+        if (cursor.loadFromSystem(sf::Cursor::Hand))
+            window.setMouseCursor(cursor);
         bgTextures.load(Textures::Space, "Assets/background.jpg");
         fontholder.load(Fonts::Game, "Assets/gamefont.ttf");
     }

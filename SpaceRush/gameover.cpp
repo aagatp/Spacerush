@@ -7,7 +7,7 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	window.setMouseCursorVisible(true);
 	float screenWidgth = window.getSize().x;
 	float screenHeight = window.getSize().y;
-
+	
 	sf::Texture& bgTexture = bgTextures.get(Textures::Space);
 	bgTexture.setRepeated(true);
 	sf::Vector2i pos(screenWidgth / 2, screenHeight / 2);
@@ -17,7 +17,7 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	sf::Font& mFont = fontholder.get(Fonts::Game);
 
 	auto exitBtn = std::make_shared<Button>();
-	exitBtn->setAttributes("Exit", 24, mFont);
+	exitBtn->setAttributes("Exit", 40, mFont);
 	exitBtn->setPos({ screenWidgth - 300,screenHeight - 100 });
 	exitBtn->setColor(sf::Color::White);
 	mButton = exitBtn;

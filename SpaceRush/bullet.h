@@ -17,7 +17,7 @@ public:
 
     void move(sf::Vector2f); //Move the bullet in the direction
     bool isOutOfBounds();
-
+    int yAxisLife;
 	static void loadTextures();
     sf::IntRect getTextureRect();
     const sf::Texture* getTexture();
