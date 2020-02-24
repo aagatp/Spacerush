@@ -8,5 +8,5 @@ Multiplayer Space Shooting+Racing Game made using C++ and SFML.
 3. Copy dll files from bin folder to SpaceRush folder in the repository.
 4. Compile and run the program from visual studio. 
 
-__Download x86 SFML binaries and run visual studio in x86(Win32) configuration.__
+__Note: Download x86 SFML binaries and run visual studio in x86(Win32) configuration.__
 
