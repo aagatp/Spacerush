@@ -86,7 +86,11 @@ void Spaceship::setPosition(sf::Vector2f position)
     healthbar.setPosition(position +sf::Vector2f(-50, 100));
 }
 
-void Spaceship::setHealth(unsigned int l_health) { m_health = l_health; }
+void Spaceship::setHealth(unsigned int l_health)
+{
+    m_health = l_health;
+    healthbar.setSize({ static_cast<float>(m_health), 15 });
+}
 
 float Spaceship::getAngle() { return m_angle; }
 

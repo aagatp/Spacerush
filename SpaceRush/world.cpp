@@ -148,7 +148,7 @@ void World::checkPickups()
 	{
 		if ((*pickup)->isGrabbed(spaceships[shipId]))
 		{
-			spaceships[shipId]->setHealth(15);
+			spaceships[shipId]->setHealth(100);
 			pickup = pickups.erase(pickup);
 		}
 		else
