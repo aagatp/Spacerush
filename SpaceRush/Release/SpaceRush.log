@@ -1,0 +1,27 @@
+﻿  animation.cpp
+  asteroids.cpp
+  collision.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\asteroids.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  spaceship.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\asteroids.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  bullet.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\spaceship.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  button.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\bullet.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  game.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\widget.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  gameover.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\game.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  gameplay.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\scene.h(5,10): fatal error C1083: Cannot open include file: 'SFML/System.hpp': No such file or directory
+  main.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\scene.h(5,10): fatal error C1083: Cannot open include file: 'SFML/System.hpp': No such file or directory
+  menu.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\game.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  scenemanager.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\menu.cpp(1,10): fatal error C1083: Cannot open include file: 'SFML/Window.hpp': No such file or directory
+  textbox.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\scene.h(5,10): fatal error C1083: Cannot open include file: 'SFML/System.hpp': No such file or directory
+  world.cpp
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\widget.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+C:\Users\A\Desktop\ESH\SpaceRush\SpaceRush\world.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory

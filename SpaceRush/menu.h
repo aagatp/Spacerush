@@ -6,6 +6,7 @@
 #include "resourceidentifiers.h"
 #include "button.h"
 #include "textbox.h"
+#include "audio.h"
 
 enum class MenuScreen
 {
@@ -33,5 +34,6 @@ private:
     bool isClicked;
     int mouseX, mouseY;
     bool startGame;
+    Audio audiomanager;
 };
 

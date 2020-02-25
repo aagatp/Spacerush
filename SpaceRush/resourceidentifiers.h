@@ -42,6 +42,8 @@ namespace SoundEffect
 		PlayerMissile,
 		MissilePickUp,
 		Button,
+		PickUp,
+		Select,
 	};
 }
 

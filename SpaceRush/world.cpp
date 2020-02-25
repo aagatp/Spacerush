@@ -1,11 +1,11 @@
 #include "world.h"
 #include <iostream>
 #include "functions.h" //utility functions library
-#include "collision.h"
+
 
 int World::count = 0;
 float World::clickrate = 0; // To limit clicks in a mouse
-World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
+World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId), audioManager(100)
 {
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
 	count++;
@@ -39,8 +39,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
-
-	manageConnection();
+	audioManager.load();
 }
 
 void World::update(sf::Time dt)
@@ -85,6 +84,7 @@ void World::lookAtMouse()
 
 void World::handleInputs()
 {
+
 	clickrate++; // increases until it reaches 60
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -94,8 +94,10 @@ void World::handleInputs()
 	{
 		/*handleInputs() function is running at 1/60 sec, so to limit clickrate we execute 
 		only when a full second is completed. so mouseclick is 1 click per second*/
+		
 		if (clickrate > 30)
 		{
+			audioManager.playSound(SoundEffect::ID::PlayerFire);
 			// making new bullets and passing to the bullets vector
 			auto newbullet = std::make_shared<Bullet>(shipId, spaceships[shipId]->getPosition(), function::normalize(direction));
 			bullets.push_back(newbullet);
@@ -104,6 +106,9 @@ void World::handleInputs()
 	}
 
 }
+
+
+
 void World::fireBullets(float speedOfBullet)
 {
 	//logic for bullet firing. under construction....
@@ -140,6 +145,7 @@ void World::updateAsteroids()
 		}
 		else
 		{
+			audioManager.playSound(SoundEffect::ID::Explosion);
 			pickups.push_back(std::make_shared<Pickup>((*asteroid)->getPosition()));
 			asteroid = asteroids.erase(asteroid);
 		}
@@ -151,6 +157,7 @@ void World::checkPickups()
 	{
 		if ((*pickup)->isGrabbed(spaceships[shipId]))
 		{
+			audioManager.playSound(SoundEffect::ID::PickUp);
 			spaceships[shipId]->setHealth(100);
 			pickup = pickups.erase(pickup);
 		}
@@ -214,16 +221,5 @@ void World::loadTextures()
 		//Pickup::loadTextures(); // nOT WORKING
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
-	}
-}
-void World::manageConnection()
-{
-	if (shipId == 0)
-	{
-
-	}
-	else
-	{
-
 	}
 }

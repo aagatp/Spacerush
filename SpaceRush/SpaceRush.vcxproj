@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="asteroids.cpp" />
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="entrybox.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="asteroids.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="entrybox.h" />

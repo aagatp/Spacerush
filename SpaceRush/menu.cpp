@@ -9,9 +9,9 @@
 #include "resourceholder.h"
 
 Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
-    : Scene(sceneManager, window),currentScreen(MenuScreen::Main),startGame(false), mouseX(0), mouseY(0), isClicked(false), mButtons()
+    : Scene(sceneManager, window),currentScreen(MenuScreen::Main),startGame(false), mouseX(0), mouseY(0), isClicked(false), mButtons(), audiomanager(100)
 {
-	
+	audiomanager.loadMenu();
     window.setMouseCursorVisible(true);
 	float screenWidgth = window.getSize().x;
 	float screenHeight = window.getSize().y;
@@ -124,7 +124,8 @@ void Menu::update(const sf::Time& dt)
 		std::unique_ptr<Scene> gamePlay(new GamePlay(sceneManager, window, shipId));
 		sceneManager.changeScene(std::move(gamePlay));
 	}
-	else {
+	else 
+	{
 		switch (currentScreen)
 		{
 		case MenuScreen::Main:
@@ -134,6 +135,7 @@ void Menu::update(const sf::Time& dt)
 				{
 					if (!isSelected[i])
 					{
+						audiomanager.playSound(SoundEffect::Select);
 						isSelected[i] = true;
 						mButtons.at(i)->setColor(sf::Color::Red);
 					}
@@ -147,6 +149,7 @@ void Menu::update(const sf::Time& dt)
 					}
 				}
 			}
+			
 
 			if (isClicked)
 			{
@@ -176,6 +179,7 @@ void Menu::update(const sf::Time& dt)
 				{
 					if (!isSelected[i])
 					{
+						audiomanager.playSound(SoundEffect::Select);
 						isSelected[i] = true;
 						mButtons.at(i)->setColor(sf::Color::Red);
 					}
@@ -189,6 +193,7 @@ void Menu::update(const sf::Time& dt)
 					}
 				}
 			}
+			
 
 			if (isClicked)
 			{
@@ -220,6 +225,7 @@ void Menu::update(const sf::Time& dt)
 			{
 				if (!isSelected[5])
 				{
+					audiomanager.playSound(SoundEffect::Select);
 					isSelected[5] = true;
 					mButtons.at(5)->setColor(sf::Color::Red);
 				}
