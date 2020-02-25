@@ -211,6 +211,7 @@ void World::loadTextures()
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
 	if (count==1)
 	{
+		//Pickup::loadTextures(); // nOT WORKING
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
 	}
