@@ -9,7 +9,7 @@
 #include "resourceholder.h"
 
 Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
-    : Scene(sceneManager, window),currentScreen(MenuScreen::Main),startGame(false), mouseX(0), mouseY(0), isClicked(false), mButtons(), audiomanager(100)
+    : Scene(sceneManager, window),currentScreen(MenuScreen::Main),startGame(false), mouseX(0), mouseY(0), isClicked(false), mButtons(), audiomanager(10)
 {
 	audiomanager.loadMenu();
     window.setMouseCursorVisible(true);

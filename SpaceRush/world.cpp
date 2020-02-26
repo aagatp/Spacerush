@@ -88,7 +88,7 @@ void World::handleInputs()
 	{
 		if (pressrate > 17)
 		{
-			audioManager.playSound(SoundEffect::ID::Engine);
+			audioManager.playSound(SoundEffect::ID::Engine).setVolume(0.5f);
 			pressrate = 0;
 		}
 		velocity += acceleration * time.asSeconds();
@@ -190,6 +190,7 @@ void World::checkCollision()
 	}
 	
 }
+
 bool World::checkAsteroidCollision(std::shared_ptr<Bullet>& bullet)
 {
 	for (auto& asteroid : asteroids)
@@ -202,6 +203,7 @@ bool World::checkAsteroidCollision(std::shared_ptr<Bullet>& bullet)
 	}
 	return false;
 }
+
 void World::draw()
 {
 	window.setView(mWorldView);
