@@ -10,7 +10,7 @@ void Audio::load()
 	bgMusic.openFromFile("Assets/Audio/music.ogg");
 	bgMusic.setLoop(true);
 	if (playBgMusic) bgMusic.play();
-
+	soundBuffers.load(SoundEffect::Engine,"Assets/Audio/engine.wav");
 	soundBuffers.load(SoundEffect::PlayerFire, "Assets/Audio/fire.wav");
 	soundBuffers.load(SoundEffect::Explosion, "Assets/Audio/explosion.wav");
 	soundBuffers.load(SoundEffect::PickUp, "Assets/Audio/pickup.wav");

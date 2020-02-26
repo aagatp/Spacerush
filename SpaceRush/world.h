@@ -50,5 +50,6 @@ private:
 	//sf::Sprite asteriod;
 	sf::Sprite finishLine;	
 	static float clickrate;
+	static float pressrate;
 };
 

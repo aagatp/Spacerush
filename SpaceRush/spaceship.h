@@ -42,6 +42,6 @@ private:
     int m_playerid;
     unsigned int m_health = 100;
     bool m_destroyed = false;
-
+    int speed;
     unsigned int bullet_no;
 };

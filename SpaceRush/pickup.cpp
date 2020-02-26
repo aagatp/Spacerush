@@ -16,14 +16,18 @@ Pickup::Pickup(sf::Vector2f pos):m_position(pos)
 void Pickup::render(sf::RenderTarget& target)
 {
 	count++;
+	int temp = count/5;
+	sf::IntRect rect(temp*256,0, 256, 256);
 	if (count > 40)
 	{
 		pickup.setPosition(m_position);
 		pickup.setTexture(pickupTex.get(Textures::CollectPickup));
+		pickup.setTextureRect(sf::IntRect(0, 0, 48, 48));
 	}
 	else
 	{
 		pickup.setTexture(pickupTex.get(Textures::Explosion));
+		pickup.setTextureRect(rect);
 	}
 	target.draw(pickup);
 }

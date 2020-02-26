@@ -4,6 +4,7 @@
 
 
 int World::count = 0;
+float World::pressrate = 0;
 float World::clickrate = 0; // To limit clicks in a mouse
 World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId), audioManager(100)
 {
@@ -24,10 +25,6 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	auto redship = std::make_shared<Spaceship>(1);
 	spaceships.push_back(blueship);
 	spaceships.push_back(redship);
-
-	/*asteriod.setTexture(textures.get(Textures::Asteriods));
-	asteriod.setPosition({100,500});
-	asteriod.scale({ 0.3,0.3 });*/
 
 	for (int i = 0; i < 25; i++) {
 		asteroids.push_back(std::make_shared<Asteroid>());
@@ -85,9 +82,15 @@ void World::lookAtMouse()
 void World::handleInputs()
 {
 
-	clickrate++; // increases until it reaches 60
+	clickrate++;
+	pressrate++;// increases until it reaches 60
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+		if (pressrate > 17)
+		{
+			audioManager.playSound(SoundEffect::ID::Engine);
+			pressrate = 0;
+		}
 		velocity += acceleration * time.asSeconds();
 	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))

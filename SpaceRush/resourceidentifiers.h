@@ -12,8 +12,7 @@ namespace Textures
 	enum ID
 	{
 		Space,
-		BlueSpaceship,
-		RedSpaceship,
+		Spaceship,
 		BlueBullet,
 		RedBullet,
 		BlueMissile,
@@ -37,6 +36,7 @@ namespace SoundEffect
 {
 	enum ID
 	{
+		Engine,
 		PlayerFire,
 		Explosion,
 		PlayerMissile,

@@ -1,26 +1,32 @@
 #include "spaceship.h"
+#include "functions.h"
 Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
 {
     healthbar.setSize({ static_cast<float>(m_health), 15 });
     
     healthbar.setOutlineColor(sf::Color::White);
     healthbar.setOutlineThickness(2);
+    sf::IntRect def(sf::IntRect(153, 0, 153, 153));
     if (a == 0)
     {
-        shipTex.load(Textures::BlueSpaceship, "Assets/bluespaceship.png");
-        spaceship.setTexture(shipTex.get(Textures::BlueSpaceship));
+        shipTex.load(Textures::Spaceship, "Assets/blue.png");
+        spaceship.setTexture(shipTex.get(Textures::Spaceship));
+
+        //spaceship.setTexture(shipTex.get(Textures::BlueSpaceship));
         spaceship.setOrigin({
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
-        healthbar.setFillColor(sf::Color::Blue);
+        healthbar.setFillColor(sf::Color::Cyan);
         spaceship.setPosition({100,500});
         healthbar.setPosition(50, 600);
     }
     if (a == 1)
     {
-        shipTex.load(Textures::RedSpaceship, "Assets/redspaceship.png");
-        spaceship.setTexture(shipTex.get(Textures::RedSpaceship));
+        shipTex.load(Textures::Spaceship, "Assets/redspaceship.png");
+        spaceship.setTexture(shipTex.get(Textures::Spaceship));
+
+        //spaceship.setTexture(shipTex.get(Textures::Spaceship));
         spaceship.setOrigin({
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
@@ -29,15 +35,16 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
         spaceship.setPosition({ 800, 500});
         healthbar.setPosition(750, 600);
     }
-    spaceship.scale({ 0.3,0.3 });
+    //spaceship.setTextureRect(def);
 }
 
 
 void Spaceship::move(sf::Vector2f pos)
 {
-    //animation.animate(pos);
+    speed = function::magnitude(pos);
     spaceship.move(-pos);
     healthbar.move(-pos);
+    //std::cout << speed << '\n';
 }
 void Spaceship::setAngle(float angle)
 {
