@@ -11,9 +11,13 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
 	count++;
 	loadTextures();
+
+
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Cross))
 		window.setMouseCursor(cursor);
+	
+	
 	for (int i = 0; i < 2; i++)
 	{
 		if (i == shipId)
@@ -51,7 +55,9 @@ void World::update(sf::Time dt)
 	fireBullets(300.f); //execution code for firing bullet if bullet exists.
 	updateAsteroids();
 	checkPickups();
-	
+
+	updateGrenades();
+
 	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
@@ -108,9 +114,60 @@ void World::handleInputs()
 		}
 	}
 
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		if (clickrate > 30)
+		{
+			//audioManager.playSound(SoundEffect::ID::PlayerFire);
+			auto newgrenade = std::make_shared<Grenade>(shipId, spaceships[shipId]->getPosition(), function::normalize(direction));
+			grenades.push_back(newgrenade);
+			clickrate = 0;
+		}
+	}
+
 }
 
+void World::updateGrenades() {
+	for (auto grenade = grenades.begin(); grenade != grenades.end();) {
+		float distanceOfGrenadeTravel = 400.f;
+		//If a certain distance is reached Explode
+		if (function::magnitude((*grenade)->distanceTravelled) > distanceOfGrenadeTravel) {
 
+			float effectScale = 500.f;
+
+			auto p = (*grenade)->position;
+			for (auto spaceship : spaceships) {
+				auto diff =  spaceship->getPosition() - p;
+				auto effectDampening = 1 / function::magnitude(diff);
+				velocity += effectScale * effectDampening * function::normalize(diff);
+				//Damage Spaceships here
+				//....
+			}
+			for (auto asteroid : asteroids) {
+				auto diff = asteroid->getPosition() - p;
+
+				auto effectDampening = 1 / function::magnitude(diff);
+				asteroid->dampingVelocity += 50000.f * effectDampening * function::normalize(diff);
+				//Damage Asteroids here
+				//....
+			}
+
+			grenade = grenades.erase(grenade);
+
+		}
+		//else just update normally
+		else {
+			auto diff = 300.f * (*grenade)->velocity * time.asSeconds();
+			(*grenade)->position += diff;
+			(*grenade)->distanceTravelled += diff;
+			(*grenade)->move(diff);
+
+			(*grenade)->rotate(time.asSeconds() * 50.f);
+			grenade++;
+		}
+	}
+}
 
 void World::fireBullets(float speedOfBullet)
 {
@@ -231,6 +288,9 @@ void World::draw()
 		asteroid->render(window);
 	for (auto pickup : pickups)
 		pickup->render(window);
+	for (auto grenade : grenades)
+		grenade->render(window);
+
 }
 
 void World::loadTextures()
@@ -241,5 +301,6 @@ void World::loadTextures()
 		//Pickup::loadTextures(); // nOT WORKING
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
+		Grenade::loadTextures();
 	}
 }

@@ -19,6 +19,8 @@ public:
 	void decreaseHealth(int);
 	bool isDestroyed();
 	const sf::Vector2f getPosition();
+	//sf::Vector2f& getVelocityRef();
+	sf::Vector2f dampingVelocity;
 private:
 	static TextureHolder asteriodsTex;
 	static int screenWidth;
@@ -28,8 +30,8 @@ private:
 
 	float angularVelocity = 0.f;
 	float scale = 1.f;
-	sf::Vector2f position;
 	sf::Vector2f velocity;
+	sf::Vector2f position;
 	sf::Vector2f direction;
 
 };

@@ -30,6 +30,8 @@ public:
     sf::IntRect getTextureRect();
     const sf::Texture* getTexture();
     const sf::Transform getInverseTransform();
+    sf::Vector2f& getVelocityRef();
+	
 private:
 
     sf::RectangleShape healthbar;

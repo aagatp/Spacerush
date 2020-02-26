@@ -107,3 +107,8 @@ void Spaceship::render(sf::RenderTarget& l_window)
     l_window.draw(spaceship);
     l_window.draw(healthbar);
 }
+
+//sf::Vector2f& Spaceship::getVelocityRef()
+//{
+//	return velocity;
+//}

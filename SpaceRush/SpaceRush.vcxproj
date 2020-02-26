@@ -150,6 +150,7 @@
     <ClCompile Include="client.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="entrybox.cpp" />
+    <ClCompile Include="grenade.cpp" />
     <ClCompile Include="pickup.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="spaceship.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="entrybox.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="grenade.h" />
     <ClInclude Include="pickup.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="spaceship.h" />

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "resourceholder.h"
 #include "resourceidentifiers.h"
+
 class Bullet
 {
 public:

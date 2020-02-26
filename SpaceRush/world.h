@@ -10,6 +10,7 @@
 #include "pickup.h"
 #include "audio.h"
 #include "collision.h"
+#include "grenade.h"
 
 class World
 {
@@ -21,7 +22,7 @@ public:
 	void lookAtMouse();
 	sf::RenderWindow& window;
 	void handleInputs();
-
+	void updateGrenades();
 
 	static int count;
 private:
@@ -45,6 +46,7 @@ private:
 	std::vector<std::shared_ptr<Bullet>>bullets;
 	std::vector<std::shared_ptr<Asteroid>>asteroids;
 	std::vector<std::shared_ptr<Pickup>>pickups;
+	std::vector<std::shared_ptr<Grenade>>grenades;
 
 	//sf::Sprite asteriod;
 	sf::Sprite finishLine;	

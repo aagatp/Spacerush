@@ -27,11 +27,14 @@ Asteroid::Asteroid() {
 	velocity = sf::Vector2f(random(0, 1000) / 1000.f, random(0, 1000) / 1000.f);
 	velocity *= 10.f;
 	direction = sf::Vector2f(random(0, 1000), random(0, 1000));
-	direction = function::normalize(direction);
+	function::normalize(direction);
 
 	asteroid.setScale(scale, scale);
 	asteroid.setPosition(position);
 	mHealth = 5;
+
+	dampingVelocity = sf::Vector2f();
+
 }
 
 
@@ -43,9 +46,11 @@ void Asteroid::render(sf::RenderTarget& l_window)
 
 void Asteroid::update(sf::Time dt)
 {
-	position += velocity * dt.asSeconds();
-	asteroid.setPosition(position);
+	//position += (velocity + dampingVelocity) * dt.asSeconds();
+	//asteroid.setPosition(position);
+	asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
 	asteroid.rotate(angularVelocity * dt.asSeconds());
+	dampingVelocity *= 0.999f;
 }
 sf::IntRect Asteroid::getTextureRect()
 {
@@ -62,7 +67,7 @@ const sf::Transform Asteroid::getInverseTransform()
 
 void Asteroid::decreaseHealth(int a)
 {
-	mHealth = mHealth - a;
+	mHealth -= a;
 }
 bool Asteroid::isDestroyed()
 {
@@ -75,6 +80,11 @@ const sf::Vector2f Asteroid::getPosition()
 	return asteroid.getPosition();
 }
 
+
+//sf::Vector2f& Asteroid::getVelocityRef()
+//{
+//	return velocity;
+//}
 
 sf::FloatRect Asteroid::getBounds()
 {
