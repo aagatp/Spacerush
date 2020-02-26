@@ -176,15 +176,30 @@ void World::checkCollision()
 	{
 		if (Collision::PixelPerfectTest(spaceships[shipId], spaceships[otherId]))
 		{
-			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
-			spaceships[otherId]->setPosition(spaceships[otherId]->getPosition() + sf::Vector2f{ 20,0 });
+			auto otherPos = spaceships[otherId]->getPosition();
+			auto thisPos = spaceships[shipId]->getPosition();
+			auto diff = otherPos - thisPos;
+			//Push back this amount
+			velocity += 2.0f * function::normalize(diff);
+			
+			//decrease health on collision among spaceships?
+			/*spaceships[shipId]->decreaseHealth(1);
+			spaceships[otherId]->decreaseHealth(1);*/
+
+			//spaceships[shipId]->setPosition(thisPos - diff / 5.0f);
+
+			//Push other spaceship in the other direction but we have no velocity attribute for other spaceship yet
+			spaceships[otherId]->setPosition(otherPos + diff/ 5.0f);
 		}
 	}
 	for (auto& asteroid : asteroids)
 	{
 		if (Collision::PixelPerfectTest(spaceships[shipId], asteroid))
 		{
-			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			auto diff = asteroid->getPosition() - spaceships[shipId]->getPosition();
+			//spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			//Push back this amount
+			velocity += 3.0f * function::normalize(diff);
 			spaceships[shipId]->decreaseHealth(1);
 		}
 	}

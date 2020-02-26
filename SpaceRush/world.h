@@ -23,7 +23,6 @@ public:
 	void handleInputs();
 
 
-
 	static int count;
 private:
 	void checkPickups();
