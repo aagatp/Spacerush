@@ -14,7 +14,7 @@ public:
     float getAngle();
     void setPosition(sf::Vector2f);
     void render(sf::RenderTarget& l_window);
-
+    int getId();
     sf::FloatRect getBounds();
     void move(sf::Vector2f); //Move the bullet in the direction
 

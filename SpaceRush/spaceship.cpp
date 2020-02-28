@@ -6,7 +6,7 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     
     healthbar.setOutlineColor(sf::Color::White);
     healthbar.setOutlineThickness(2);
-    sf::IntRect def(sf::IntRect(153, 0, 153, 153));
+    //sf::IntRect def(sf::IntRect(153, 0, 153, 153));
     if (a == 0)
     {
         //shipTex.load(Textures::Spaceship, "Assets/sheet.png"); //sprite sheet not in position

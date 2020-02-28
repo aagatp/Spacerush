@@ -105,10 +105,10 @@ void World::handleInputs()
 			isShooting = true;
 			clickrate = 0;
 		}
-		else
-		{
-			isShooting = false;
-		}
+	}
+	else
+	{
+		isShooting = false;
 	}
 
 }
@@ -123,11 +123,17 @@ void World::fireBullets(float speedOfBullet)
 		{
 			bullet = bullets.erase(bullet);
 		}
-		else if (Collision::PixelPerfectTest(spaceships[otherId], *bullet))
+		else if ((*bullet)->getId() != otherId && Collision::PixelPerfectTest(spaceships[otherId], *bullet))
 		{
 			bullet = bullets.erase(bullet);
-			spaceships[otherId]->decreaseHealth(70);
-		}
+			spaceships[otherId]->decreaseHealth(10);
+		}	
+		else if ((*bullet)->getId() == otherId && Collision::PixelPerfectTest(spaceships[shipId], *bullet))
+		{
+			bullet = bullets.erase(bullet);
+			spaceships[shipId]->decreaseHealth(10);
+		}	
+	
 		else if (checkAsteroidCollision(*bullet))
 		{
 			bullet = bullets.erase(bullet);
@@ -161,7 +167,7 @@ void World::checkPickups()
 {
 	for (auto pickup = pickups.begin(); pickup != pickups.end();)
 	{
-		if ((*pickup)->isGrabbed(spaceships[shipId]))
+		if ((*pickup)->isGrabbed(spaceships[shipId])|| (*pickup)->isGrabbed(spaceships[otherId]))
 		{
 			audioManager.playSound(SoundEffect::ID::PickUp);
 			spaceships[shipId]->setHealth(100);
@@ -238,7 +244,10 @@ void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float a
 
 	if (shoot)
 	{
-		sf::Vector2f dir= { cos(angle),sin(angle) };
+		auto a = cos(function::PI / 180 * (angle+90));
+		auto b = sin(function::PI / 180 * (angle+90));
+		sf::Vector2f dir= { a, b };
+		//std::cout << otherId << " The game " << angle << "\n";
 		auto newbullet = std::make_shared<Bullet>(otherId, spaceships[otherId]->getPosition(), function::normalize(dir));
 		bullets.push_back(newbullet);
 	}
@@ -251,6 +260,6 @@ sf::Packet World::getStatus()
 	float angle = spaceships[shipId]->getAngle();
 	unsigned int health = spaceships[shipId]->getHealth();
 	//std::cout << health << "\n";
-	packet<< shipId<<  xpos << ypos << angle <<health <<isShooting;
+	packet<< shipId<<  xpos << ypos << angle<<health <<isShooting;
 	return packet;
 }

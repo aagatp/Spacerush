@@ -43,7 +43,10 @@ void Bullet::move(sf::Vector2f position)
 	yAxisLife++;
 	bullet.move(-position);
 }
-
+int Bullet::getId()
+{
+	return shipId;
+}
 sf::Vector2f Bullet::getPosition()
 {
 	return bullet.getPosition();
