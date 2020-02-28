@@ -19,6 +19,7 @@ private:
 public:
 	//Create a audio object wherever needed
 	Audio(int);
+	~Audio();
 	//Loading takes time so use accoringly
 	//Maybe write different functions for different screens
 	//so we can load audios separately
