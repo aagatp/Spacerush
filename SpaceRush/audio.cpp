@@ -5,6 +5,14 @@ Audio::Audio(int maxSoundCount = 100):maxSoundCount(maxSoundCount)
 	sounds = new sf::Sound[maxSoundCount];
 }
 
+
+
+Audio::~Audio()
+{
+
+	delete[] sounds;
+}
+
 void Audio::load()
 {
 	bgMusic.openFromFile("Assets/Audio/music.ogg");
