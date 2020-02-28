@@ -21,9 +21,8 @@ public:
 	void lookAtMouse();
 	sf::RenderWindow& window;
 	void handleInputs();
-
-
-
+	sf::Packet getStatus();
+	void setOtherPlayers(int,sf::Vector2f,unsigned int, float);
 	static int count;
 private:
 	void checkPickups();

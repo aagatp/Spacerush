@@ -8,14 +8,31 @@ GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window, int shi
 {
     window.setMouseCursorVisible(true);
     float screenWidgth = window.getSize().x;
-    float screenHeight = window.getSize().y*30;
-
+    float screenHeight = window.getSize().y * 30;
     sf::Texture& bgTexture = bgTextures.get(Textures::Space);
     bgTexture.setRepeated(true);
     sf::Vector2i pos(screenWidgth / 2, screenHeight / 2);
     sf::Vector2i size(screenWidgth, screenHeight);
     bgSprite.setTextureRect(sf::IntRect(pos, size));
     bgSprite.setTexture(bgTexture);
+    if (shipId == 0)
+    {
+        otherId = 1;
+        server = new Server();
+        client = new Client(sf::IpAddress::getLocalAddress());
+        server->recieveConnection();
+        server->recieveConnection();
+        server->thread();
+    }
+    else
+    {
+        otherId = 0;
+        client = new Client();
+        client->sendConnection();
+        
+    }
+    client->thread();
+
 }
 
 GamePlay::~GamePlay() 
@@ -36,7 +53,7 @@ void GamePlay::processEvents() {
 
 void GamePlay::update(const sf::Time& dt)
 {
-    if (gamePlay == 0)
+    if (gamePlay == 0 && window.hasFocus())
     {
         mWorld.update(dt);
         if (mWorld.checkGameStatus() == 1)
@@ -48,8 +65,11 @@ void GamePlay::update(const sf::Time& dt)
             gamePlay = 2;
         }
         mWorld.handleInputs();
+        sf::Packet pack{ mWorld.getStatus() };
+        client->send(pack);
+        mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId));
     }
-    else
+    if (gamePlay ==1 || gamePlay==2)
     {
         std::unique_ptr<Scene> gameOver(new GameOver(sceneManager, window, gamePlay));
         sceneManager.changeScene(std::move(gameOver));

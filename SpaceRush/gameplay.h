@@ -2,6 +2,8 @@
 #include "scene.h"
 #include "scenemanager.h"
 #include "world.h" 
+#include "server.h"
+#include "client.h"
 
 class GamePlay :
 	public Scene
@@ -14,8 +16,11 @@ public:
     void update(const sf::Time& dt);
     void draw();
 private:
-    int shipId;
+    int shipId,otherId;
     World mWorld;
+    //std::unique_ptr<Server> server;
+    Client* client;
+    Server* server;
     sf::Sprite bgSprite;
     int gamePlay;
 };

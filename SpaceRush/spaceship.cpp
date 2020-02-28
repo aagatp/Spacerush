@@ -9,10 +9,10 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     sf::IntRect def(sf::IntRect(153, 0, 153, 153));
     if (a == 0)
     {
-        shipTex.load(Textures::Spaceship, "Assets/blue.png");
+        //shipTex.load(Textures::Spaceship, "Assets/sheet.png"); //sprite sheet not in position
+        shipTex.load(Textures::Spaceship, "Assets/blue.png"); // But this is working ...
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
 
-        //spaceship.setTexture(shipTex.get(Textures::BlueSpaceship));
         spaceship.setOrigin({
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
@@ -25,8 +25,6 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     {
         shipTex.load(Textures::Spaceship, "Assets/redspaceship.png");
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
-
-        //spaceship.setTexture(shipTex.get(Textures::Spaceship));
         spaceship.setOrigin({
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
@@ -104,6 +102,9 @@ float Spaceship::getAngle() { return m_angle; }
 
 void Spaceship::render(sf::RenderTarget& l_window)
 {
+    
+    //spaceship.setTextureRect(sf::IntRect(speed*153,0,153,153)); //animation logic not working
+
     l_window.draw(spaceship);
     l_window.draw(healthbar);
 }

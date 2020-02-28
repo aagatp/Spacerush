@@ -14,12 +14,12 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Cross))
 		window.setMouseCursor(cursor);
-	for (int i = 0; i < 2; i++)
+	/*for (int i = 0; i < 2; i++)
 	{
 		if (i == shipId)
 			continue;
 		otherId = i;
-	}
+	}*/
 
 	auto blueship = std::make_shared<Spaceship>(0);
 	auto redship = std::make_shared<Spaceship>(1);
@@ -225,4 +225,22 @@ void World::loadTextures()
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
 	}
+}
+void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float angle)
+{
+	otherId = other;
+	spaceships[otherId]->setPosition(pos);
+	spaceships[otherId]->setAngle(angle);
+	spaceships[otherId]->setHealth(h);
+}
+sf::Packet World::getStatus()
+{
+	sf::Packet packet;
+	float xpos = spaceships[shipId]->getPosition().x;
+	float ypos = spaceships[shipId]->getPosition().y;
+	float angle = spaceships[shipId]->getAngle();
+	unsigned int health = spaceships[shipId]->getHealth();
+	//std::cout << health << "\n";
+	packet<< shipId<<  xpos << ypos << angle <<health;
+	return packet;
 }
