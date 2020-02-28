@@ -6,15 +6,16 @@ class Bullet
 {
 public:
     Bullet(int, sf::Vector2f, sf::Vector2f direction);
+    //Bullet(int, sf::Vector2f, float angle);
     ~Bullet();
     
     sf::Vector2f getPosition();
     sf::Vector2f getDirection();
+    float getAngle();
     void setPosition(sf::Vector2f);
     void render(sf::RenderTarget& l_window);
 
     sf::FloatRect getBounds();
-
     void move(sf::Vector2f); //Move the bullet in the direction
     bool isOutOfBounds();
     int yAxisLife;
@@ -33,5 +34,6 @@ private:
     sf::Vector2f m_position;
     sf::Vector2f acceleration;
     sf::Vector2f m_direction;
+    float m_angle;
 };
 

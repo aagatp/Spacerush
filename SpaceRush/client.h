@@ -13,6 +13,7 @@ public:
 	unsigned int getHealth(int);
 	//bool isReady();
 	//void recieveSignal();
+	bool isShooting(int);
 	void sendConnection();
 private:
 	int playerId;
@@ -24,4 +25,5 @@ private:
 	sf::Vector2f positions[2];
 	float directions[2];
 	unsigned int healths[2];
+	bool shoots[2];
 };

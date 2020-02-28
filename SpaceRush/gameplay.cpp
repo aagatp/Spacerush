@@ -67,7 +67,7 @@ void GamePlay::update(const sf::Time& dt)
         mWorld.handleInputs();
         sf::Packet pack{ mWorld.getStatus() };
         client->send(pack);
-        mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId));
+        mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId), client->isShooting(otherId));
     }
     if (gamePlay ==1 || gamePlay==2)
     {

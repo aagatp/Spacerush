@@ -81,7 +81,6 @@ void World::lookAtMouse()
 
 void World::handleInputs()
 {
-
 	clickrate++;
 	pressrate++;// increases until it reaches 60
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -93,18 +92,22 @@ void World::handleInputs()
 		}
 		velocity += acceleration * time.asSeconds();
 	}
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (clickrate > 30)
 	{
 		/*handleInputs() function is running at 1/60 sec, so to limit clickrate we execute 
 		only when a full second is completed. so mouseclick is 1 click per second*/
-		
-		if (clickrate > 30)
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			audioManager.playSound(SoundEffect::ID::PlayerFire);
 			// making new bullets and passing to the bullets vector
 			auto newbullet = std::make_shared<Bullet>(shipId, spaceships[shipId]->getPosition(), function::normalize(direction));
 			bullets.push_back(newbullet);
+			isShooting = true;
 			clickrate = 0;
+		}
+		else
+		{
+			isShooting = false;
 		}
 	}
 
@@ -123,7 +126,7 @@ void World::fireBullets(float speedOfBullet)
 		else if (Collision::PixelPerfectTest(spaceships[otherId], *bullet))
 		{
 			bullet = bullets.erase(bullet);
-			spaceships[otherId]->decreaseHealth(2);
+			spaceships[otherId]->decreaseHealth(70);
 		}
 		else if (checkAsteroidCollision(*bullet))
 		{
@@ -226,12 +229,19 @@ void World::loadTextures()
 		Bullet::loadTextures();
 	}
 }
-void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float angle)
+void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float angle, bool shoot)
 {
 	otherId = other;
 	spaceships[otherId]->setPosition(pos);
 	spaceships[otherId]->setAngle(angle);
 	spaceships[otherId]->setHealth(h);
+
+	if (shoot)
+	{
+		sf::Vector2f dir= { cos(angle),sin(angle) };
+		auto newbullet = std::make_shared<Bullet>(otherId, spaceships[otherId]->getPosition(), function::normalize(dir));
+		bullets.push_back(newbullet);
+	}
 }
 sf::Packet World::getStatus()
 {
@@ -241,6 +251,6 @@ sf::Packet World::getStatus()
 	float angle = spaceships[shipId]->getAngle();
 	unsigned int health = spaceships[shipId]->getHealth();
 	//std::cout << health << "\n";
-	packet<< shipId<<  xpos << ypos << angle <<health;
+	packet<< shipId<<  xpos << ypos << angle <<health <<isShooting;
 	return packet;
 }

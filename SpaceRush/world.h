@@ -22,7 +22,7 @@ public:
 	sf::RenderWindow& window;
 	void handleInputs();
 	sf::Packet getStatus();
-	void setOtherPlayers(int,sf::Vector2f,unsigned int, float);
+	void setOtherPlayers(int,sf::Vector2f,unsigned int, float,bool);
 	static int count;
 private:
 	void checkPickups();
@@ -34,6 +34,7 @@ private:
 	void loadTextures();
 	sf::View mWorldView;
 	sf::Vector2f direction;
+	bool isShooting=false;
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
 	sf::Time time;

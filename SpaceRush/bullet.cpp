@@ -1,11 +1,13 @@
 #include "bullet.h"
 #include <iostream>
+#include "functions.h"
 
 Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction)
 	:shipId(playerid)
 {
 	yAxisLife = 0;
 	m_direction = direction;
+	m_angle = (atan2(direction.y, direction.x)) * 180 / function::PI;
 	ship_position = l_shipposition;
 	bullet.setPosition(ship_position);
 	if (shipId == 0)
@@ -23,9 +25,10 @@ Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction
 		});
 
 	bullet.scale({ 0.7,0.7 });
-
-	bullet.setRotation((atan2(direction.y, direction.x)) * 180 / 3.14159265 - 90);
+	
+	bullet.setRotation(m_angle - 90);
 }
+
 Bullet::~Bullet()
 {
 }
@@ -50,6 +53,7 @@ sf::Vector2f Bullet::getDirection()
 {
 	return m_direction;
 }
+
 bool Bullet::isOutOfBounds()
 {
 	if (bullet.getPosition().x > 960|| bullet.getPosition().x < 5 || yAxisLife>1000)
@@ -75,6 +79,10 @@ void Bullet::render(sf::RenderTarget& l_window)
 sf::FloatRect Bullet::getBounds()
 {
 	return bullet.getGlobalBounds();
+}
+float Bullet::getAngle()
+{
+	return m_angle;
 }
 sf::IntRect Bullet::getTextureRect()
 {

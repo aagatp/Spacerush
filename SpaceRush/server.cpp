@@ -48,8 +48,9 @@ void Server::send(sf::Packet packet, sf::IpAddress ip, unsigned short port)
     float xpos, ypos, angle;
     unsigned int health;
     int playerid;
-    packet >> playerid >> xpos >> ypos >> angle >> health; 
-    std::cout << playerid << ": " << xpos << " " << ypos << "\n"; //Recieved upto this point.
+    bool shoot;
+    packet >> playerid >> xpos >> ypos >> angle >> health >> shoot ; 
+    //std::cout << playerid << ": " << xpos << " " << ypos << "\n"; //Recieved upto this point.
     for (int i = 0; i < 2; i++)
     {
         if (serverIp == ip)

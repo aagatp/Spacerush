@@ -33,14 +33,16 @@ void Client::send(sf::Packet packet)
 {
     float xpos, ypos, angle;
     unsigned int health;
+    bool shoot;
     int playerid;
-    packet >> playerid>> xpos>> ypos>> angle >> health;
+    packet >> playerid>> xpos>> ypos>> angle >> health >> shoot;
     c_socket.send(packet, serverIp, 8000);
 }
 void Client::listen()
 {
     float xpos, ypos, angle;
     unsigned int health;
+    bool shoot;
     int playerid;
     sf::Socket::Status value;
     sf::IpAddress tempip;
@@ -51,12 +53,13 @@ void Client::listen()
         value = c_socket.receive(packet, tempip, tempport); // Not recieved here.
         if (value == 0)
         {
-            packet >> playerid >> xpos >> ypos >> angle >> health;
-            //std::cout << playerid << ": " << xpos << " " << ypos << "\n";
+            packet >> playerid >> xpos >> ypos >> angle >> health >> shoot;
+            std::cout << playerid << ": " << xpos << " " << ypos << "\n";
             playerId = playerid;
             positions[playerId] = sf::Vector2f{ xpos, ypos };
             healths[playerId] = health;
             directions[playerId] = angle;
+            shoots[playerId] = shoot;
         }
     }
 }
@@ -72,6 +75,10 @@ unsigned int Client::getHealth(int playerid)
 float Client::getDirection(int playerid)
 {
     return directions[playerid];
+}
+bool Client::isShooting(int playerid)
+{
+    return shoots[playerid];
 }
 
 void Client::thread()
