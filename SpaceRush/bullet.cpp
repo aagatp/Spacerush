@@ -50,11 +50,6 @@ bool Bullet::isOutOfBounds()
 	return false;
 }
 
-
-
-
-
-
 void Bullet::loadTextures()
 {
 	bulletTex.load(Textures::BlueBullet, "Assets/bluebullet.png");
