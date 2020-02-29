@@ -21,6 +21,7 @@ namespace Textures
 		Asteroids,
 		CollectPickup,
 		FinishLine,
+		StartLine,
 	};
 }
 

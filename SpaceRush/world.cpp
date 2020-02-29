@@ -34,9 +34,24 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 		asteroids.push_back(std::make_shared<Asteroid>());
 	}
 
+	startLine.setTexture(textures.get(Textures::StartLine));
+	startLine.setScale(0.6f, 0.5f);
+
 	finishLine.setTexture(textures.get(Textures::FinishLine));
 	float height = window.getSize().x * 2;
+	float width = window.getSize().x;
+	float windowHeight = window.getSize().y;
+
 	finishLine.setPosition({0,-height});
+	/*startLine.setOrigin(
+		startLine.getGlobalBounds().width/2 + startLine.getOrigin().x,
+		startLine.getGlobalBounds().height/ 2 + startLine.getOrigin().y
+
+	);*/
+
+	//std::cout << startLine.getOrigin().x <<"   "<< startLine.getOrigin().y << std::endl;
+
+	startLine.setPosition({0,820});
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
@@ -280,6 +295,8 @@ void World::draw()
 {
 	window.setView(mWorldView);
 	window.draw(finishLine);
+	window.draw(startLine);
+
 	for (auto spaceship:spaceships)
 		spaceship->render(window);
 	for (auto bullet : bullets) 
@@ -296,11 +313,14 @@ void World::draw()
 void World::loadTextures()
 {
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
+	textures.load(Textures::StartLine, "Assets/StartLine.png");
+
 	if (count==1)
 	{
 		//Pickup::loadTextures(); // nOT WORKING
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
 		Grenade::loadTextures();
+
 	}
 }
