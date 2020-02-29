@@ -10,6 +10,7 @@
 #include "pickup.h"
 #include "audio.h"
 #include "collision.h"
+#include "grenade.h"
 
 class World
 {
@@ -29,6 +30,7 @@ private:
 	void checkCollision();
 	bool checkAsteroidCollision(std::shared_ptr<Bullet>&);
 	void updateAsteroids();
+	void updateGrenades();
 	void fireBullets(float);
 	int shipId,otherId;
 	void loadTextures();
@@ -46,6 +48,7 @@ private:
 	std::vector<std::shared_ptr<Bullet>>bullets;
 	std::vector<std::shared_ptr<Asteroid>>asteroids;
 	std::vector<std::shared_ptr<Pickup>>pickups;
+	std::vector < std::shared_ptr<Grenade>>grenades;
 
 	//sf::Sprite asteriod;
 	sf::Sprite finishLine;	

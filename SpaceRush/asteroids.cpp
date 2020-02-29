@@ -1,6 +1,5 @@
 #include "asteroids.h"
 #include "functions.h"
-
 int random(int from, int to) {
 	return  rand() % (to - from) + from;
 }
@@ -32,6 +31,8 @@ Asteroid::Asteroid() {
 	asteroid.setScale(scale, scale);
 	asteroid.setPosition(position);
 	mHealth = 5;
+
+	dampingVelocity = sf::Vector2f();
 }
 
 
@@ -43,9 +44,9 @@ void Asteroid::render(sf::RenderTarget& l_window)
 
 void Asteroid::update(sf::Time dt)
 {
-	position += velocity * dt.asSeconds();
-	asteroid.setPosition(position);
+	asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
 	asteroid.rotate(angularVelocity * dt.asSeconds());
+	dampingVelocity *= 0.999f;
 }
 sf::IntRect Asteroid::getTextureRect()
 {

@@ -19,6 +19,7 @@ public:
 	void decreaseHealth(int);
 	bool isDestroyed();
 	const sf::Vector2f getPosition();
+	sf::Vector2f dampingVelocity;
 private:
 	static TextureHolder asteriodsTex;
 	static int screenWidth;

@@ -35,6 +35,7 @@ private:
     sf::RectangleShape healthbar;
     TextureHolder shipTex;
     sf::Sprite spaceship;
+    sf::Sprite test;
     float m_angle;
     sf::IntRect rect;
     sf::Vector2f m_position;

@@ -6,5 +6,5 @@ namespace function {
 		return vec;
 	}
 	inline float magnitude(sf::Vector2f& vec) { return sqrt(pow(vec.x, 2) + pow(vec.y, 2)); }
-
+	
 }

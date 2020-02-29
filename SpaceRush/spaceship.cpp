@@ -10,9 +10,8 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     {
         shipTex.load(Textures::Spaceship, "Assets/blue.png"); // But this is working ...
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
-
         spaceship.setOrigin({
-            spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
+            (spaceship.getGlobalBounds().width + rect.width) / 2 + (spaceship.getOrigin().x + rect.width),
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
         healthbar.setFillColor(sf::Color::Cyan);
@@ -34,12 +33,11 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
 
 }
 
-
 void Spaceship::move(sf::Vector2f pos)
 {
     speed = function::magnitude(pos);
     spaceship.move(-pos);
-    healthbar.move(-pos);
+    healthbar.move(-pos);    
 }
 void Spaceship::setAngle(float angle)
 {
@@ -98,7 +96,7 @@ float Spaceship::getAngle() { return m_angle; }
 
 void Spaceship::render(sf::RenderTarget& l_window)
 {
-
+    
     l_window.draw(spaceship);
     l_window.draw(healthbar);
 }
