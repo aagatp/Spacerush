@@ -16,6 +16,11 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	bgSprite.setTexture(bgTexture);
 	sf::Font& mFont = fontholder.get(Fonts::Game);
 
+	auto winText = std::make_shared<TextBox>();
+	winText->setAttributes("WINNER", 60, mFont);
+	winText->setPos({ screenWidgth / 2 - winText->getSize() / 2, 200 });
+	winText->setColor(sf::Color::Red);
+
 	auto exitBtn = std::make_shared<Button>();
 	exitBtn->setAttributes("Exit", 40, mFont);
 	exitBtn->setPos({ screenWidgth - 300,screenHeight - 100 });
@@ -23,16 +28,16 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	mButton = exitBtn;
 
 	if (winner == 1)
-		winnerName = "Blue Aircraft Wins the game.";
+		winnerName = "You win the game.";
 	else
-		winnerName = "Red Aircraft Wins the game. ";
+		winnerName = "Opponent Wins the game. ";
 
 	auto gameText = std::make_shared<TextBox>();
-	gameText->setAttributes(winnerName, 30, mFont);
-	gameText->setPos({ 100,300});
-	gameText->setColor(sf::Color::Red);
+	gameText->setAttributes(winnerName, 40, mFont);
+	gameText->setPos({ screenWidgth / 2 - gameText->getSize() / 2, 500});
+	gameText->setColor(sf::Color::Magenta);
 	mTextBox = gameText;
-
+	wintext = winText;
 }
 GameOver::~GameOver()
 {
@@ -75,11 +80,9 @@ void GameOver::update(const sf::Time& dt)
 			{
 				isSelected = true;
 				mButton->setColor(sf::Color::Red);
-				if (isClicked)
-				{
-					quit = true;
-				}
 			}
+			if (isClicked && isSelected)
+				quit = true;
 		}
 		else
 		{
@@ -102,6 +105,7 @@ void GameOver::draw()
 	window.clear(sf::Color::Black);
 	window.draw(bgSprite);
 	mButton->render(window);
+	wintext->render(window);
 	mTextBox->render(window);
 	window.display();
 }

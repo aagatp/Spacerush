@@ -1,15 +1,15 @@
 #include "pickup.h"
 #include "collision.h"
 
-//void Pickup::loadTextures()
-//{
-//	//Not Working
-//}
-
-Pickup::Pickup(sf::Vector2f pos):m_position(pos)
+void Pickup::loadTextures()
 {
 	pickupTex.load(Textures::CollectPickup, "Assets/pickup.png");
 	pickupTex.load(Textures::Explosion, "Assets/explosion.png");
+}
+TextureHolder Pickup::pickupTex;
+
+Pickup::Pickup(sf::Vector2f pos):m_position(pos)
+{
 	count = 0;
 	pickup.setPosition(m_position - sf::Vector2f{100, 100});
 }

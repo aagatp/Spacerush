@@ -1,41 +1,35 @@
 #include "client.h"
 #include <iostream>
-Client::Client() : listenThread(&Client::listen, this) //, m_readytoplayThread(&Client::PlaySignal, this)
+#include <fstream>
+Client::Client() : listenThread(&Client::listen, this)
 {
     std::string sIp;
     c_socket.bind(sf::Socket::AnyPort);
-    //c_socket.setBlocking(false);
-    std::cout << "Enter server ip: ";
-    std::cin >> sIp;
+    std::ifstream infile;
+    infile.open("ip.txt");
+    infile >> sIp;
+    std::cout << sIp;
     sf::IpAddress send(sIp);
     serverIp = send;
+    infile.close();
 }
 
 Client::Client(sf::IpAddress l_ip) : listenThread(&Client::listen, this)
 {
     c_socket.bind(sf::Socket::AnyPort);
-    //c_socket.setBlocking(false);
     serverIp = l_ip;
     sendConnection();
 }
 void Client::sendConnection()
 {
     sf::Packet packet;
-    int a;
-    std::cout << "Type anything to send: ";
-    std::cin >> a;
     std::string test = "Connection Sent to Server\n";
-    packet << test << a ;
+    packet << test ;
     c_socket.send(packet, serverIp, 8000);
 }
 
 void Client::send(sf::Packet packet)
 {
-    float xpos, ypos, angle;
-    unsigned int health;
-    bool shoot;
-    int playerid;
-    packet >> playerid>> xpos>> ypos>> angle >> health >> shoot;
     c_socket.send(packet, serverIp, 8000);
 }
 void Client::listen()
@@ -50,11 +44,10 @@ void Client::listen()
     sf::Packet packet;
     while (1)
     {
-        value = c_socket.receive(packet, tempip, tempport); // Not recieved here.
+        value = c_socket.receive(packet, tempip, tempport);
         if (value == 0)
         {
             packet >> playerid >> xpos >> ypos >> angle >> health >> shoot;
-            std::cout << playerid << ": " << xpos << " " << ypos << "\n";
             playerId = playerid;
             positions[playerId] = sf::Vector2f{ xpos, ypos };
             healths[playerId] = health;

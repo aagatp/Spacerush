@@ -1,12 +1,12 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include <fstream>
 #include "menu.h"
 #include "scene.h"
 #include "gameplay.h"
-#include "button.h"
 #include "resourceholder.h"
+
 
 Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
     : Scene(sceneManager, window),currentScreen(MenuScreen::Main),startGame(false), mouseX(0), mouseY(0), isClicked(false), mButtons(), audiomanager(100)
@@ -54,12 +54,18 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	backBtn->setPos({ screenWidgth-100-backBtn->getSize(),screenHeight-100});
 	backBtn->setColor(sf::Color::White);
 
+	auto joinPlay = std::make_shared<Button>();
+	joinPlay->setAttributes("Play", 40, mFont);
+	joinPlay->setPos({ screenWidgth / 2 - playBtn->getSize() / 2,900 });
+	joinPlay->setColor(sf::Color::White);
+
 	mButtons.push_back(playBtn);
 	mButtons.push_back(aboutBtn);
 	mButtons.push_back(exitBtn);
 	mButtons.push_back(hostBtn);
 	mButtons.push_back(joinBtn);
 	mButtons.push_back(backBtn);
+	mButtons.push_back(joinPlay);
 
 	auto titleText = std::make_shared<TextBox>();
 	titleText->setAttributes("Space Rush", 100, mFont);
@@ -79,8 +85,13 @@ Menu::Menu(SceneManager& sceneManager, sf::RenderWindow& window)
 	mTextBox.push_back(titleText);
 	mTextBox.push_back(readText);
 	mTextBox.push_back(creditsText);
-	
-	for (int i = 0; i < 6; i++)
+
+	auto entry = std::make_shared<EntryBox>();
+	entry->setAttributes(mFont);
+	entry->setPos({ screenWidgth / 2 - joinBtn->getSize() / 2,800 });
+	entrybox = entry;
+
+	for (int i = 0; i < 7; i++)
 	{
 		isSelected[i] = false;
 	}
@@ -173,7 +184,9 @@ void Menu::update(const sf::Time& dt)
 			break;
 
 		case MenuScreen::Multiplayer:
-			for (int i = 3; i < 6; i++)
+			entrybox->handleInput(window);
+			entrybox->setFocus(true);
+			for (int i = 3; i < 7; i++)
 			{
 				if (mButtons.at(i)->getGlobalBounds().contains(mouseX, mouseY))
 				{
@@ -202,18 +215,36 @@ void Menu::update(const sf::Time& dt)
 					window.setMouseCursorVisible(true);
 					startGame = true;
 					shipId = 0;
+					
 				}
 				else
 				{
+					
 					if (isSelected[4])
 					{
-						startGame = true;
+						
+						isJoined = true;
 						shipId = 1;
+						
 					}
 					else
 					{
 						if (isSelected[5])
+						{
+							isJoined = false;
 							currentScreen = MenuScreen::Main;
+						}
+						else 
+						{
+							if (isSelected[6])
+							{
+								std::ofstream outfile;
+								outfile.open("ip.txt");
+								outfile << entrybox->getText();
+								outfile.close();
+								startGame = true;
+							}
+						}
 					}
 				}
 				isClicked = false;
@@ -263,9 +294,16 @@ void Menu::draw() {
 		mTextBox.at(0)->render(window);
 		break;
 	case MenuScreen::Multiplayer:
-		for (int j = 3; j < 6; j++)
+		mButtons.at(3)->render(window);
+		mButtons.at(5)->render(window);
+		if (isJoined)
 		{
-			mButtons.at(j)->render(window);
+			entrybox->render(window);
+			mButtons.at(6)->render(window);
+		}
+		else
+		{
+			mButtons.at(4)->render(window);
 		}
 		mTextBox.at(0)->render(window);
 		break;

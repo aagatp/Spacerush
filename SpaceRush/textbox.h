@@ -16,4 +16,6 @@ public:
 private:
     sf::Vector2f m_position;
     sf::Text m_textbox;
+    
+
 };

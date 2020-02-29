@@ -2,7 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "gameover.h"
-
+#include <thread>
 GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window, int shipId)
     : Scene{sceneManager, window},shipId(shipId), mWorld(window,shipId),gamePlay(0)
 {
@@ -37,6 +37,8 @@ GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window, int shi
 
 GamePlay::~GamePlay() 
 {
+    delete server;
+    delete client;
 }
 
 
@@ -53,6 +55,11 @@ void GamePlay::processEvents() {
 
 void GamePlay::update(const sf::Time& dt)
 {
+    if (gamePlay == 1 || gamePlay == 2)
+    {
+        std::unique_ptr<Scene> gameOver(new GameOver(sceneManager, window, gamePlay));
+        sceneManager.changeScene(std::move(gameOver));
+    }
     if (gamePlay == 0 && window.hasFocus())
     {
         mWorld.update(dt);
@@ -68,11 +75,6 @@ void GamePlay::update(const sf::Time& dt)
         sf::Packet pack{ mWorld.getStatus() };
         client->send(pack);
         mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId), client->isShooting(otherId));
-    }
-    if (gamePlay ==1 || gamePlay==2)
-    {
-        std::unique_ptr<Scene> gameOver(new GameOver(sceneManager, window, gamePlay));
-        sceneManager.changeScene(std::move(gameOver));
     }
 }
 

@@ -11,8 +11,6 @@ public:
 	sf::Vector2f getPosition(int);
 	float getDirection(int);
 	unsigned int getHealth(int);
-	//bool isReady();
-	//void recieveSignal();
 	bool isShooting(int);
 	void sendConnection();
 private:

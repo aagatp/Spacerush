@@ -6,10 +6,8 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     
     healthbar.setOutlineColor(sf::Color::White);
     healthbar.setOutlineThickness(2);
-    //sf::IntRect def(sf::IntRect(153, 0, 153, 153));
     if (a == 0)
     {
-        //shipTex.load(Textures::Spaceship, "Assets/sheet.png"); //sprite sheet not in position
         shipTex.load(Textures::Spaceship, "Assets/blue.png"); // But this is working ...
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
 
@@ -30,10 +28,10 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
             spaceship.getGlobalBounds().height / 2 + spaceship.getOrigin().y
             });
         healthbar.setFillColor(sf::Color::Red);
-        spaceship.setPosition({ 800, 500});
-        healthbar.setPosition(750, 600);
+        spaceship.setPosition({ 700, 500});
+        healthbar.setPosition(650, 600);
     }
-    //spaceship.setTextureRect(def);
+
 }
 
 
@@ -42,13 +40,11 @@ void Spaceship::move(sf::Vector2f pos)
     speed = function::magnitude(pos);
     spaceship.move(-pos);
     healthbar.move(-pos);
-    //std::cout << speed << '\n';
 }
 void Spaceship::setAngle(float angle)
 {
     m_angle = angle;
     spaceship.setRotation(angle);
-    //healthbar.setRotation(angle);
 }
 
 
@@ -102,8 +98,6 @@ float Spaceship::getAngle() { return m_angle; }
 
 void Spaceship::render(sf::RenderTarget& l_window)
 {
-    
-    //spaceship.setTextureRect(sf::IntRect(speed*153,0,153,153)); //animation logic not working
 
     l_window.draw(spaceship);
     l_window.draw(healthbar);

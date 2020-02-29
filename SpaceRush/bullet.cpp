@@ -33,9 +33,9 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::setPosition(sf::Vector2f initial_position)
+void Bullet::setPosition(sf::Vector2f position)
 {
-	bullet.setPosition(initial_position);
+	bullet.setPosition(position);
 }
 
 void Bullet::move(sf::Vector2f position)

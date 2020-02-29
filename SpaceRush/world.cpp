@@ -14,12 +14,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Cross))
 		window.setMouseCursor(cursor);
-	/*for (int i = 0; i < 2; i++)
-	{
-		if (i == shipId)
-			continue;
-		otherId = i;
-	}*/
+	
 
 	auto blueship = std::make_shared<Spaceship>(0);
 	auto redship = std::make_shared<Spaceship>(1);
@@ -59,11 +54,11 @@ void World::update(sf::Time dt)
 
 int World::checkGameStatus()
 {
-	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()))
+	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[otherId]->getHealth()<=0)
 	{
 		return 1;
 	}
-	else if (spaceships[shipId]->getHealth() <= 0)
+	else if (spaceships[shipId]->getHealth() <= 0 || spaceships[otherId]->getBounds().intersects(finishLine.getGlobalBounds()))
 	{
 		return 2;
 	}
@@ -87,7 +82,7 @@ void World::handleInputs()
 	{
 		if (pressrate > 17)
 		{
-			audioManager.playSound(SoundEffect::ID::Engine);
+			audioManager.playSound(SoundEffect::ID::Engine).setVolume(1.5f);
 			pressrate = 0;
 		}
 		velocity += acceleration * time.asSeconds();
@@ -117,7 +112,6 @@ void World::handleInputs()
 
 void World::fireBullets(float speedOfBullet)
 {
-	//logic for bullet firing. under construction....
 	for (auto bullet = bullets.begin(); bullet != bullets.end();) {
 		if ((*bullet)->isOutOfBounds())
 		{
@@ -185,15 +179,30 @@ void World::checkCollision()
 	{
 		if (Collision::PixelPerfectTest(spaceships[shipId], spaceships[otherId]))
 		{
-			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
-			spaceships[otherId]->setPosition(spaceships[otherId]->getPosition() + sf::Vector2f{ 20,0 });
+			auto otherPos = spaceships[otherId]->getPosition();
+			auto thisPos = spaceships[shipId]->getPosition();
+			auto diff = otherPos - thisPos;
+			//Push back this amount
+			velocity += 2.0f * function::normalize(diff);
+
+			//decrease health on collision among spaceships?
+			/*spaceships[shipId]->decreaseHealth(1);
+			spaceships[otherId]->decreaseHealth(1);*/
+
+			//spaceships[shipId]->setPosition(thisPos - diff / 5.0f);
+
+			//Push other spaceship in the other direction but we have no velocity attribute for other spaceship yet
+			spaceships[otherId]->setPosition(otherPos + diff / 5.0f);
 		}
 	}
 	for (auto& asteroid : asteroids)
 	{
 		if (Collision::PixelPerfectTest(spaceships[shipId], asteroid))
 		{
-			spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			auto diff = asteroid->getPosition() - spaceships[shipId]->getPosition();
+			//spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			//Push back this amount
+			velocity += 3.0f * function::normalize(diff);
 			spaceships[shipId]->decreaseHealth(1);
 		}
 	}
@@ -230,7 +239,7 @@ void World::loadTextures()
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
 	if (count==1)
 	{
-		//Pickup::loadTextures(); // nOT WORKING
+		Pickup::loadTextures();
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
 	}
@@ -247,7 +256,6 @@ void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float a
 		auto a = cos(function::PI / 180 * (angle+90));
 		auto b = sin(function::PI / 180 * (angle+90));
 		sf::Vector2f dir= { a, b };
-		//std::cout << otherId << " The game " << angle << "\n";
 		auto newbullet = std::make_shared<Bullet>(otherId, spaceships[otherId]->getPosition(), function::normalize(dir));
 		bullets.push_back(newbullet);
 	}
@@ -259,7 +267,6 @@ sf::Packet World::getStatus()
 	float ypos = spaceships[shipId]->getPosition().y;
 	float angle = spaceships[shipId]->getAngle();
 	unsigned int health = spaceships[shipId]->getHealth();
-	//std::cout << health << "\n";
 	packet<< shipId<<  xpos << ypos << angle<<health <<isShooting;
 	return packet;
 }

@@ -36,12 +36,10 @@ private:
     TextureHolder shipTex;
     sf::Sprite spaceship;
     float m_angle;
-
+    sf::IntRect rect;
     sf::Vector2f m_position;
-    //Animation animation;
     int m_playerid;
     unsigned int m_health = 100;
     bool m_destroyed = false;
     int speed;
-    unsigned int bullet_no;
 };

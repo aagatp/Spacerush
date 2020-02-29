@@ -20,7 +20,7 @@ private:
 	sf::Font mFont;
 	std::string winnerName;
 	Button::buttonPtr mButton;
-	TextBox::textboxPtr mTextBox;
+	TextBox::textboxPtr mTextBox,wintext;
 	bool isClicked, quit;
 	int mouseX, mouseY;
 	bool isSelected;

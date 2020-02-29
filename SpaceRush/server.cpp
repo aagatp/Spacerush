@@ -3,14 +3,10 @@
 Server::Server():listenThread(&Server::listen, this)
 {
 	s_socket.bind(port);
-    //serverIp = "127.0.0.1";
     serverIp = sf::IpAddress::getLocalAddress();
-    //s_socket.setBlocking(false);
 }
 void Server::recieveConnection()
 {
-    std::string test;
-    int a;
     sf::Packet packet;
     sf::IpAddress remoteIp;
     unsigned short remotePort;
@@ -25,8 +21,6 @@ void Server::recieveConnection()
         hostPort = remotePort;
     }
     std::cout << "Connection Recived from: " << remoteIp <<"\n";
-    packet >> test >> a;
-    std::cout << test << a;
 }
 void Server::listen()
 {
@@ -36,7 +30,7 @@ void Server::listen()
     {
         sf::Packet packet;
         
-        s_socket.receive(packet, tempip, tempport); // Received upto this point.
+        s_socket.receive(packet, tempip, tempport);
         
         send(packet, tempip,tempport); 
     }
@@ -45,12 +39,6 @@ void Server::listen()
 void Server::send(sf::Packet packet, sf::IpAddress ip, unsigned short port)
 {
     
-    float xpos, ypos, angle;
-    unsigned int health;
-    int playerid;
-    bool shoot;
-    packet >> playerid >> xpos >> ypos >> angle >> health >> shoot ; 
-    //std::cout << playerid << ": " << xpos << " " << ypos << "\n"; //Recieved upto this point.
     for (int i = 0; i < 2; i++)
     {
         if (serverIp == ip)
@@ -61,7 +49,6 @@ void Server::send(sf::Packet packet, sf::IpAddress ip, unsigned short port)
         {
             s_socket.send(packet, serverIp, hostPort);
         }
-        
     }
 }
 void Server::thread()

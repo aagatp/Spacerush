@@ -18,7 +18,6 @@ public:
 private:
     int shipId,otherId;
     World mWorld;
-    //std::unique_ptr<Server> server;
     Client* client;
     Server* server;
     sf::Sprite bgSprite;

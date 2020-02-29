@@ -7,7 +7,7 @@
 #include "button.h"
 #include "textbox.h"
 #include "audio.h"
-
+#include "entrybox.h"
 enum class MenuScreen
 {
     Main,
@@ -29,11 +29,14 @@ private:
     sf::Font mFont;
     std::vector<Button::buttonPtr>mButtons;
     std::vector<TextBox::textboxPtr> mTextBox;
+    EntryBox::entryboxPtr entrybox;
     MenuScreen currentScreen;
-    bool isSelected[6];
+    bool isSelected[7];
     bool isClicked;
     int mouseX, mouseY;
     bool startGame;
     Audio audiomanager;
+    bool isJoined = false;
+    
 };
 
