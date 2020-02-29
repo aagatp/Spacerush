@@ -29,7 +29,7 @@ private:
 	sf::Sprite asteroid;
 
 	float angularVelocity = 0.f;
-	float scale = 1.f;
+	float scale = 0.5f;
 	sf::Vector2f velocity;
 	sf::Vector2f position;
 	sf::Vector2f direction;

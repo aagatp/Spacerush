@@ -39,8 +39,8 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 
 	finishLine.setTexture(textures.get(Textures::FinishLine));
 	float height = window.getSize().x * 2;
-	float width = window.getSize().x;
-	float windowHeight = window.getSize().y;
+	//float width = window.getSize().x;
+	//float windowHeight = window.getSize().y;
 
 	finishLine.setPosition({0,-height});
 	/*startLine.setOrigin(

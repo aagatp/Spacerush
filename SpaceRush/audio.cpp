@@ -12,7 +12,7 @@ Audio::~Audio()
 
 void Audio::load()
 {
-	bgMusic.openFromFile("Assets/Audio/music.ogg");
+	bgMusic.openFromFile("Assets/Audio/backgroundMusic.wav");
 	bgMusic.setLoop(true);
 	if (playBgMusic) bgMusic.play();
 	bgMusic.setVolume(5.0f);
