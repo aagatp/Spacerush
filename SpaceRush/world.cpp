@@ -33,6 +33,10 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	float height = window.getSize().x * 2;
 	finishLine.setPosition({0,-height});
 
+	startLine.setTexture(textures.get(Textures::StartLine));
+	startLine.setScale(0.6f, 0.5f);
+	finishLine.setPosition({ 0,-height });
+
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
 	audioManager.load();
@@ -45,14 +49,17 @@ void World::update(sf::Time dt)
 	//Float value to control how fast the spaceship accelerates
 	acceleration = 2.f * function::normalize(direction);
 	lookAtMouse();
-	spaceships[shipId]->move(velocity);
+
 	checkCollision();//checks collision between spaceship and asteriods;
 	fireBullets(300.f); //execution code for firing bullet if bullet exists.
 	updateAsteroids();
 	updateGrenades();
 	checkPickups();
-	
-	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
+	if (spaceships[shipId]->checkBounds())
+	{
+		spaceships[shipId]->move(velocity);
+		mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
+	}
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
 	velocity *= 0.99f;
 }
@@ -267,6 +274,7 @@ void World::draw()
 {
 	window.setView(mWorldView);
 	window.draw(finishLine);
+	window.draw(startLine);
 	for (auto spaceship:spaceships)
 		spaceship->render(window);
 	for (auto bullet : bullets) 
@@ -282,6 +290,7 @@ void World::draw()
 void World::loadTextures()
 {
 	textures.load(Textures::FinishLine, "Assets/finishline.png");
+	textures.load(Textures::StartLine, "Assets/startline.png");
 	if (count==1)
 	{
 		Grenade::loadTextures();

@@ -22,5 +22,6 @@ private:
     Server* server;
     sf::Sprite bgSprite;
     int gamePlay;
+
 };
 

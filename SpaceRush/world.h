@@ -51,7 +51,8 @@ private:
 	std::vector < std::shared_ptr<Grenade>>grenades;
 
 	//sf::Sprite asteriod;
-	sf::Sprite finishLine;	
+	sf::Sprite finishLine;
+	sf::Sprite startLine;
 	static float clickrate;
 	static float pressrate;
 };

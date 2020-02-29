@@ -42,11 +42,34 @@ void Asteroid::render(sf::RenderTarget& l_window)
 	l_window.draw(asteroid);
 }
 
+bool Asteroid::checkBounds()
+{
+	if (asteroid.getPosition().x <= 0)
+	{
+		asteroid.setPosition(asteroid.getPosition() + sf::Vector2f{25, 0});
+		return false;
+	}
+	else if (asteroid.getPosition().x >= 1000)
+	{
+		asteroid.setPosition(asteroid.getPosition() - sf::Vector2f{ 25,0});
+		return false;
+	}
+	else if (asteroid.getPosition().y >= 1000)
+	{
+		asteroid.setPosition(asteroid.getPosition() - sf::Vector2f{ 0,25 });
+		return false;
+	}
+	return true;
+}
+
 void Asteroid::update(sf::Time dt)
 {
-	asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
-	asteroid.rotate(angularVelocity * dt.asSeconds());
-	dampingVelocity *= 0.999f;
+	if (checkBounds())
+	{
+		asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
+		asteroid.rotate(angularVelocity * dt.asSeconds());
+		dampingVelocity *= 0.999f;
+	}
 }
 sf::IntRect Asteroid::getTextureRect()
 {

@@ -30,8 +30,9 @@ public:
     sf::IntRect getTextureRect();
     const sf::Texture* getTexture();
     const sf::Transform getInverseTransform();
+    bool checkBounds();
 private:
-
+    
     sf::RectangleShape healthbar;
     TextureHolder shipTex;
     sf::Sprite spaceship;

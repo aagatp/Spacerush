@@ -79,6 +79,7 @@ void GamePlay::update(const sf::Time& dt)
 }
 
 void GamePlay::draw() {
+    window.setView(window.getDefaultView());
     window.clear(sf::Color::Black);
     window.draw(bgSprite);
     mWorld.draw();
