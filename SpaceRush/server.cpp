@@ -1,10 +1,12 @@
 #include "server.h"
 #include <iostream>
+
 Server::Server():listenThread(&Server::listen, this)
 {
 	s_socket.bind(port);
     serverIp = sf::IpAddress::getLocalAddress();
 }
+
 void Server::recieveConnection()
 {
     sf::Packet packet;
@@ -51,6 +53,7 @@ void Server::send(sf::Packet packet, sf::IpAddress ip, unsigned short port)
         }
     }
 }
+
 void Server::thread()
 {
 	listenThread.launch();
