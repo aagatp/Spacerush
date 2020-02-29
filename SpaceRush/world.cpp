@@ -55,12 +55,16 @@ void World::update(sf::Time dt)
 	updateAsteroids();
 	updateGrenades();
 	checkPickups();
-	if (spaceships[shipId]->checkBounds())
+
+	auto p = spaceships[shipId]->getPosition();
+
+	if (p.x < 0 || p.x > 1000 || p.y > 1000)
 	{
-		spaceships[shipId]->move(velocity);
-		mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
+		velocity *= -1.0f;
 	}
 	//How fast the velocity dampens every frame (Handling increases if close to 1.0f)
+	spaceships[shipId]->move(velocity);
+	mWorldView.move(0.f, -velocity.y * dt.asSeconds() * 60);
 	velocity *= 0.99f;
 }
 

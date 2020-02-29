@@ -44,21 +44,12 @@ void Asteroid::render(sf::RenderTarget& l_window)
 
 bool Asteroid::checkBounds()
 {
-	if (asteroid.getPosition().x <= 0)
+	if (asteroid.getPosition().x <= 0 || asteroid.getPosition().x >= 1000 || asteroid.getPosition().y >= 1000)
 	{
-		asteroid.setPosition(asteroid.getPosition() + sf::Vector2f{25, 0});
+		velocity *= -1.0f;
 		return false;
 	}
-	else if (asteroid.getPosition().x >= 1000)
-	{
-		asteroid.setPosition(asteroid.getPosition() - sf::Vector2f{ 25,0});
-		return false;
-	}
-	else if (asteroid.getPosition().y >= 1000)
-	{
-		asteroid.setPosition(asteroid.getPosition() - sf::Vector2f{ 0,25 });
-		return false;
-	}
+
 	return true;
 }
 
