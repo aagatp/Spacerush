@@ -29,32 +29,16 @@ Bullet::Bullet(int playerid, sf::Vector2f l_shipposition, sf::Vector2f direction
 	bullet.setRotation(m_angle - 90);
 }
 
-Bullet::~Bullet()
-{
-}
 
-void Bullet::setPosition(sf::Vector2f initial_position)
+void Bullet::setPosition(sf::Vector2f position)
 {
-	bullet.setPosition(initial_position);
+	bullet.setPosition(position);
 }
 
 void Bullet::move(sf::Vector2f position)
 {
 	yAxisLife++;
 	bullet.move(-position);
-}
-int Bullet::getId()
-{
-	return shipId;
-}
-sf::Vector2f Bullet::getPosition()
-{
-	return bullet.getPosition();
-}
-
-sf::Vector2f Bullet::getDirection()
-{
-	return m_direction;
 }
 
 bool Bullet::isOutOfBounds()
@@ -66,19 +50,34 @@ bool Bullet::isOutOfBounds()
 	return false;
 }
 
+
+
+
+
+
 void Bullet::loadTextures()
 {
 	bulletTex.load(Textures::BlueBullet, "Assets/bluebullet.png");
 	bulletTex.load(Textures::RedBullet, "Assets/redbullet.png");
 }
-
 TextureHolder Bullet::bulletTex;
-
 void Bullet::render(sf::RenderTarget& l_window)
 {
 	l_window.draw(bullet);
 }
 
+int Bullet::getId()
+{
+	return shipId;
+}
+sf::Vector2f Bullet::getPosition()
+{
+	return bullet.getPosition();
+}
+sf::Vector2f Bullet::getDirection()
+{
+	return m_direction;
+}
 sf::FloatRect Bullet::getBounds()
 {
 	return bullet.getGlobalBounds();
@@ -98,4 +97,8 @@ const sf::Texture* Bullet::getTexture()
 const sf::Transform Bullet::getInverseTransform()
 {
 	return bullet.getInverseTransform();
+}
+
+Bullet::~Bullet()
+{
 }
