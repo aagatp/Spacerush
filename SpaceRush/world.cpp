@@ -30,12 +30,12 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	}
 
 	finishLine.setTexture(textures.get(Textures::FinishLine));
-	float height = window.getSize().x * 2;
-	finishLine.setPosition({0,-height});
+	float height = window.getSize().x;
+	finishLine.setPosition({0,-height*2});
 
 	startLine.setTexture(textures.get(Textures::StartLine));
 	startLine.setScale(0.6f, 0.5f);
-	finishLine.setPosition({ 0,-height });
+	startLine.setPosition({20,800});
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
@@ -58,7 +58,7 @@ void World::update(sf::Time dt)
 
 	auto p = spaceships[shipId]->getPosition();
 
-	if (p.x < 0 || p.x > 1000 || p.y > 1000)
+	if (p.x < 10 || p.x > 960 || p.y > 550)
 	{
 		velocity *= -1.0f;
 	}

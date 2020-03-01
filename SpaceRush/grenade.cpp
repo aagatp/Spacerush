@@ -15,7 +15,7 @@ Grenade::Grenade()
 			grenade.getGlobalBounds().height / 2 + grenade.getOrigin().y
 		});
 	grenade.setScale({ 0.3,0.3 });
-	position = sf::Vector2f(getRandom(0, 960), getRandom(-3000, 1000));
+	position = sf::Vector2f(getRandom(0, 960), getRandom(-3000, 0));
 	grenade.setPosition(position);
 }
 void Grenade::render(sf::RenderTarget& target)

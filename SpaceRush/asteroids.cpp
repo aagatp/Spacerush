@@ -22,7 +22,7 @@ Asteroid::Asteroid() {
 	scale = static_cast<float> (random(25, 50));
 	scale /= 100;
 
-	position = sf::Vector2f(random(0, 960), random(-3000, 1000));
+	position = sf::Vector2f(random(0, 960), random(-3000, 0));
 	velocity = sf::Vector2f(random(0, 1000) / 1000.f, random(0, 1000) / 1000.f);
 	velocity *= 10.f;
 	direction = sf::Vector2f(random(0, 1000), random(0, 1000));
@@ -42,25 +42,25 @@ void Asteroid::render(sf::RenderTarget& l_window)
 	l_window.draw(asteroid);
 }
 
-bool Asteroid::checkBounds()
-{
-	if (asteroid.getPosition().x <= 0 || asteroid.getPosition().x >= 1000 || asteroid.getPosition().y >= 1000)
-	{
-		velocity *= -1.0f;
-		return false;
-	}
-
-	return true;
-}
+//void Asteroid::checkBounds()
+//{
+//	
+//}
 
 void Asteroid::update(sf::Time dt)
 {
-	if (checkBounds())
+	if (asteroid.getPosition().x <= 100 || asteroid.getPosition().x >= 900 || asteroid.getPosition().y >= 800)
+	{
+		velocity *= -1.0f;
+		asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
+	}
+	else
 	{
 		asteroid.move(-(velocity + dampingVelocity) * dt.asSeconds());
 		asteroid.rotate(angularVelocity * dt.asSeconds());
 		dampingVelocity *= 0.999f;
 	}
+
 }
 sf::IntRect Asteroid::getTextureRect()
 {

@@ -24,7 +24,7 @@ void Client::sendConnection()
 {
     sf::Packet packet;
     std::string test = "Connection Sent to Server\n";
-    packet << test ;
+    packet << test;
     c_socket.send(packet, serverIp, 8000);
 }
 

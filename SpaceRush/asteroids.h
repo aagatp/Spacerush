@@ -21,7 +21,7 @@ public:
 	const sf::Vector2f getPosition();
 	sf::Vector2f dampingVelocity;
 private:
-	bool checkBounds();
+	//void checkBounds();
 	static TextureHolder asteriodsTex;
 	static int screenWidth;
 
