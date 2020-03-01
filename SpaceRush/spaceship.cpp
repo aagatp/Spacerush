@@ -45,25 +45,26 @@ void Spaceship::setAngle(float angle)
     m_angle = angle;
     spaceship.setRotation(angle);
 }
-bool Spaceship::checkBounds()
-{
-    if (spaceship.getPosition().x <= 0 )
-    {
-        (*this).setPosition({ spaceship.getPosition().x + 50, spaceship.getPosition().y });
-        return false;
-    }
-    else if (spaceship.getPosition().x >= 1000)
-    {
-        (*this).setPosition(spaceship.getPosition() - sf::Vector2f{50,0});
-        return false;
-    }
-    else if (spaceship.getPosition().y >= 1000)
-    {
-        //
-    }
-    
-    return true;
-}
+//Not needed but might be useful 
+//bool Spaceship::checkBounds()
+//{
+//    if (spaceship.getPosition().x <= 0 )
+//    {
+//        (*this).setPosition({ spaceship.getPosition().x + 50, spaceship.getPosition().y });
+//        return false;
+//    }
+//    else if (spaceship.getPosition().x >= 1000)
+//    {
+//        (*this).setPosition(spaceship.getPosition() - sf::Vector2f{50,0});
+//        return false;
+//    }
+//    else if (spaceship.getPosition().y >= 1000)
+//    {
+//        //
+//    }
+//    
+//    return true;
+//}
 
 void Spaceship::decreaseHealth(int amount)
 {
