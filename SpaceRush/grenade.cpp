@@ -14,7 +14,7 @@ Grenade::Grenade()
 			grenade.getGlobalBounds().width / 2 + grenade.getOrigin().x,
 			grenade.getGlobalBounds().height / 2 + grenade.getOrigin().y
 		});
-	grenade.setScale({ 0.3,0.3 });
+	grenade.setScale({ 0.7,0.7 });
 	position = sf::Vector2f(getRandom(0, 960), getRandom(-3000, 0));
 	grenade.setPosition(position);
 }

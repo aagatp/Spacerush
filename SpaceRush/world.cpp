@@ -42,7 +42,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	float height = window.getSize().y;
 	//std::cout << height;
 	finishLine.setScale(3.f, 3.f);
-	finishLine.setPosition({ 500,-height * 4 });
+	finishLine.setPosition({ 500,-6000});
 
 
 
@@ -101,10 +101,10 @@ void World::update(sf::Time dt)
 
 int World::checkGameStatus()
 {
-	//std::cout << spaceships[otherId]->getHealth();
-	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[otherId]->getHealth() <= 0)
+	
+	if (spaceships[shipId]->getPosition().y <= -6000 || spaceships[otherId]->getHealth() <= 0)
 		return 1;
-	else if (spaceships[otherId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[shipId]->getHealth() <= 0)
+	else if (spaceships[otherId]->getPosition().y <= -6000 || spaceships[shipId]->getHealth() <= 0)
 		return 2;
 	else
 		return -1;
@@ -229,7 +229,7 @@ void World::updateGrenades() {
 			{
 				auto diff = spaceship->getPosition() - p;
 				auto effectDampening = 1 / function::magnitude(diff);
-				spaceship->decreaseHealth(function::magnitude(diff) * 2 / 10);
+				//spaceship->decreaseHealth(function::magnitude(diff) * 2 / 10);
 				velocity += effectScale * effectDampening * function::normalize(diff);
 				//Damage Spaceships here
 				//....

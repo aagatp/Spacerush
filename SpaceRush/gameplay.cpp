@@ -35,9 +35,8 @@ GamePlay::GamePlay(SceneManager& sceneManager, sf::RenderWindow& window, int shi
 
 }
 
-GamePlay::~GamePlay() 
+GamePlay::~GamePlay()
 {
-    std::cout << " Destroyed ";
     if (shipId == 0)
     {
         server->s_socket.unbind();
@@ -59,7 +58,10 @@ void GamePlay::processEvents() {
 
 void GamePlay::update(const sf::Time& dt)
 {
-    
+    sf::Packet pack{ mWorld.getStatus() };
+    client->send(pack);
+    mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId), client->isShooting(otherId));
+
     if (gamePlay == 1 || gamePlay == 2)
     {
         std::unique_ptr<Scene> gameOver(new GameOver(sceneManager, window, gamePlay));
@@ -69,9 +71,6 @@ void GamePlay::update(const sf::Time& dt)
     {
         if (gamePlay == 0 && window.hasFocus())
         {
-            sf::Packet pack{ mWorld.getStatus() };
-            client->send(pack);
-            mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId), client->isShooting(otherId));
             mWorld.update(dt);
             if (mWorld.checkGameStatus() == 1)
             {
@@ -84,7 +83,10 @@ void GamePlay::update(const sf::Time& dt)
             mWorld.handleInputs();
 
         }
+        //mWorld.setOtherPlayers(otherId, client->getPosition(otherId), client->getHealth(otherId), client->getDirection(otherId), client->isShooting(otherId));
+
     }
+   
 }
 
 void GamePlay::draw() {
