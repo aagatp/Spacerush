@@ -10,6 +10,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 {
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
 	count++;
+	srand(100);
 	loadTextures();
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Cross))
@@ -24,7 +25,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	for (int i = 0; i < 25; i++) {
 		asteroids.push_back(std::make_shared<Asteroid>());
 	}
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		grenades.push_back(std::make_shared<Grenade>());
 	}
@@ -70,14 +71,13 @@ void World::update(sf::Time dt)
 
 int World::checkGameStatus()
 {
-	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[otherId]->getHealth()<=0)
-	{
+	//std::cout << spaceships[otherId]->getHealth();
+	if (spaceships[shipId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[otherId]->getHealth() <= 0)
 		return 1;
-	}
-	else if (spaceships[shipId]->getHealth() <= 0 || spaceships[otherId]->getBounds().intersects(finishLine.getGlobalBounds()))
-	{
+	else if (spaceships[otherId]->getBounds().intersects(finishLine.getGlobalBounds()) || spaceships[shipId]->getHealth() <= 0)
 		return 2;
-	}
+	else
+		return -1;
 }
 
 void World::lookAtMouse()
@@ -181,7 +181,7 @@ void World::updateGrenades() {
 			(*grenade)->getBounds().intersects(spaceships[shipId]->getBounds()))
 		{
 
-			float effectScale = 1000.f;
+			float effectScale = 500.f;
 
 			auto p = (*grenade)->getPosition();
 			for (auto spaceship : spaceships) 

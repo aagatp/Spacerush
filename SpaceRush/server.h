@@ -9,8 +9,9 @@ public:
 	void thread();
 	//void sendPlaySignal();
 	void recieveConnection();
-private:
 	sf::UdpSocket s_socket;
+private:
+	
 	sf::IpAddress serverIp;
 	unsigned short port = 8000;
 	sf::IpAddress otherIp;

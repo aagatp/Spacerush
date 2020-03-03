@@ -1,9 +1,12 @@
 #include "gameover.h"
 #include "menu.h"
+#include <iostream>
 
 GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int winner) :
 	Scene{ sceneManager,window }, mouseX(0), mouseY(0), isClicked(false),isSelected(false),quit(false)
 {
+	std::cout << " Drawn ";
+
 	window.setMouseCursorVisible(true);
 	float screenWidgth = window.getSize().x;
 	float screenHeight = window.getSize().y;
@@ -17,7 +20,7 @@ GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int win
 	sf::Font& mFont = fontholder.get(Fonts::Game);
 
 	auto winText = std::make_shared<TextBox>();
-	winText->setAttributes("WINNER", 60, mFont);
+	winText->setAttributes("GAME OVER", 60, mFont);
 	winText->setPos({ screenWidgth / 2 - winText->getSize() / 2, 200 });
 	winText->setColor(sf::Color::Red);
 
@@ -46,7 +49,7 @@ GameOver::~GameOver()
 
 void GameOver::processEvents() {
 	sf::Event event;
-
+	
 	if (window.pollEvent(event))
 	{
 		switch (event.type)

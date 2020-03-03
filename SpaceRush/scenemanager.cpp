@@ -1,5 +1,6 @@
 #include "scenemanager.h"
 #include "scene.h"
+#include <iostream>
 
 SceneManager::SceneManager():m_running(true)
 {

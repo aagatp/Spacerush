@@ -13,10 +13,11 @@ public:
 	unsigned int getHealth(int);
 	bool isShooting(int);
 	void sendConnection();
+	sf::UdpSocket c_socket;
 private:
 	int playerId;
 	bool readytoplay=false;
-	sf::UdpSocket c_socket;
+	
 	sf::IpAddress serverIp;
 	sf::Thread listenThread;
 	unsigned short port;

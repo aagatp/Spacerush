@@ -20,6 +20,9 @@ Client::Client(sf::IpAddress l_ip) : listenThread(&Client::listen, this)
     serverIp = l_ip;
     sendConnection();
 }
+
+
+
 void Client::sendConnection()
 {
     sf::Packet packet;
