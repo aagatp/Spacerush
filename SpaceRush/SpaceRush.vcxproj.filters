@@ -48,9 +48,6 @@
     <ClCompile Include="spaceship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="asteroids.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,5 +146,13 @@
     <ClInclude Include="grenade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BitmaskManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="collision.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

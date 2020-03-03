@@ -8,6 +8,13 @@ public:
 	void render(sf::RenderTarget& target);
 	bool isGrabbed(std::shared_ptr<Spaceship>& spaceship);
 	static void loadTextures(); 
+	sf::IntRect getTextureRect();
+	const sf::Texture* getTexture();
+	const sf::Transform getInverseTransform();
+	sf::FloatRect getBounds();
+
+
+
 private:
 	int count;
 	static TextureHolder pickupTex;

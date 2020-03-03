@@ -31,12 +31,31 @@ void Pickup::render(sf::RenderTarget& target)
 	}
 	target.draw(pickup);
 }
-bool Pickup::isGrabbed(std::shared_ptr<Spaceship>& sp)
+
+sf::IntRect Pickup::getTextureRect()
 {
-	if (Collision::PixelPerfectTest(sp, pickup))
-	{
-		return true;
-	}
-	return false;
+	return pickup.getTextureRect();
 }
+const sf::Texture* Pickup::getTexture()
+{
+	return pickup.getTexture();
+}
+const sf::Transform Pickup::getInverseTransform()
+{
+	return pickup.getInverseTransform();
+}
+sf::FloatRect Pickup::getBounds()
+{
+	return pickup.getGlobalBounds();
+}
+
+//bool Pickup::isGrabbed(std::shared_ptr<Spaceship>& sp)
+//{
+//
+//	if (Collision::PixelPerfectTest(sp, *this))
+//	{
+//		return true;
+//	}
+//	return false;
+//}
 

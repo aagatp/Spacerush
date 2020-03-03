@@ -9,13 +9,15 @@ float World::clickrate = 0; // To limit clicks in a mouse
 World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId), audioManager(100)
 {
 	//shipId is to know if the player is host(blue ship) or the client(red ship). id 0 for host, id 1 for client.
+
 	count++;
 	srand(100);
+
 	loadTextures();
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Cross))
 		window.setMouseCursor(cursor);
-	
+
 
 	auto blueship = std::make_shared<Spaceship>(0);
 	auto redship = std::make_shared<Spaceship>(1);
@@ -31,12 +33,32 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	}
 
 	finishLine.setTexture(textures.get(Textures::FinishLine));
-	float height = window.getSize().x;
-	finishLine.setPosition({0,-height*2});
+
+	finishLine.setOrigin({
+		finishLine.getGlobalBounds().width / 2 + finishLine.getOrigin().x,
+		finishLine.getGlobalBounds().height / 2 + finishLine.getOrigin().y
+
+		});
+	float height = window.getSize().y;
+	//std::cout << height;
+	finishLine.setScale(3.f, 3.f);
+	finishLine.setPosition({ 500,-height * 4 });
+
+
 
 	startLine.setTexture(textures.get(Textures::StartLine));
-	startLine.setScale(0.6f, 0.5f);
-	startLine.setPosition({20,800});
+
+	startLine.setOrigin({
+		startLine.getGlobalBounds().width / 2 + startLine.getOrigin().x,
+		startLine.getGlobalBounds().height / 2 + startLine.getOrigin().y
+
+		});
+
+	/*startLine.setScale(0.6f, 0.5f);
+	startLine.setPosition({20,800});*/
+
+	startLine.setScale(3.f, 3.f);
+	startLine.setPosition({ 500, 700 });
 
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
@@ -181,7 +203,7 @@ void World::updateGrenades() {
 			(*grenade)->getBounds().intersects(spaceships[shipId]->getBounds()))
 		{
 
-			float effectScale = 500.f;
+			float effectScale = 400.f;
 
 			auto p = (*grenade)->getPosition();
 			for (auto spaceship : spaceships) 
@@ -215,7 +237,8 @@ void World::checkPickups()
 {
 	for (auto pickup = pickups.begin(); pickup != pickups.end();)
 	{
-		if ((*pickup)->isGrabbed(spaceships[shipId])|| (*pickup)->isGrabbed(spaceships[otherId]))
+		if (Collision::PixelPerfectTest((*pickup),spaceships[shipId]) 
+			|| Collision::PixelPerfectTest((*pickup),spaceships[otherId]))
 		{
 			audioManager.playSound(SoundEffect::ID::PickUp);
 			spaceships[shipId]->setHealth(100);
