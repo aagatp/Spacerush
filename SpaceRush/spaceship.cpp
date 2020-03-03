@@ -8,7 +8,8 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     healthbar.setOutlineThickness(2);
     if (a == 0)
     {
-        shipTex.load(Textures::Spaceship, "Assets/blue.png"); // But this is working ...
+        shipTex.load(Textures::Spaceship, "Assets/bluespaceship.png"); // But this is working ...
+        shipTex.load(Textures::Spaceship2, "Assets/bluespaceship2.png"); // But this is working ...
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
         spaceship.setOrigin({
             (spaceship.getGlobalBounds().width + rect.width) / 2 + (spaceship.getOrigin().x + rect.width),
@@ -21,6 +22,7 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
     if (a == 1)
     {
         shipTex.load(Textures::Spaceship, "Assets/redspaceship.png");
+        shipTex.load(Textures::Spaceship2, "Assets/redspaceship2.png");
         spaceship.setTexture(shipTex.get(Textures::Spaceship));
         spaceship.setOrigin({
             spaceship.getGlobalBounds().width / 2 + spaceship.getOrigin().x,
@@ -39,6 +41,10 @@ void Spaceship::move(sf::Vector2f pos)
     spaceship.move(-pos);
     healthbar.move(-pos);
     
+}
+void Spaceship::setTexture(Textures::ID id)
+{
+    spaceship.setTexture(shipTex.get(id));
 }
 void Spaceship::setAngle(float angle)
 {

@@ -30,7 +30,8 @@ public:
     sf::IntRect getTextureRect();
     const sf::Texture* getTexture();
     const sf::Transform getInverseTransform();
-    bool checkBounds();
+     void setTexture(Textures::ID);
+    //bool checkBounds();
 private:
     
     sf::RectangleShape healthbar;

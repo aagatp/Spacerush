@@ -5,7 +5,6 @@
 GameOver::GameOver(SceneManager& sceneManager, sf::RenderWindow& window, int winner) :
 	Scene{ sceneManager,window }, mouseX(0), mouseY(0), isClicked(false),isSelected(false),quit(false)
 {
-	std::cout << " Drawn ";
 
 	window.setMouseCursorVisible(true);
 	float screenWidgth = window.getSize().x;

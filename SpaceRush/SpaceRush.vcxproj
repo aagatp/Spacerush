@@ -147,6 +147,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="asteroids.cpp" />
     <ClCompile Include="audio.cpp" />
+    <ClCompile Include="blackhole.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="entrybox.cpp" />
     <ClCompile Include="grenade.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="asteroids.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="BitmaskManager.h" />
+    <ClInclude Include="blackhole.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="entrybox.h" />

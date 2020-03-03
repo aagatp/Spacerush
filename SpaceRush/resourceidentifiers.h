@@ -13,6 +13,7 @@ namespace Textures
 	{
 		Space,
 		Spaceship,
+		Spaceship2,
 		BlueBullet,
 		RedBullet,
 		Grenade,
@@ -20,6 +21,8 @@ namespace Textures
 		Asteroids,
 		CollectPickup,
 		FinishLine,
+		BlackHole,
+		Halo,
 		StartLine
 	};
 }

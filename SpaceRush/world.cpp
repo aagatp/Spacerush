@@ -60,6 +60,11 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	startLine.setScale(3.f, 3.f);
 	startLine.setPosition({ 500, 700 });
 
+	
+	blackholes.emplace_back(new Blackhole(40,-1000));
+	blackholes.emplace_back(new Blackhole(700, -3000));
+
+
 	velocity = sf::Vector2f();
 	acceleration = sf::Vector2f();
 	audioManager.load();
@@ -78,6 +83,9 @@ void World::update(sf::Time dt)
 	updateAsteroids();
 	updateGrenades();
 	checkPickups();
+
+	for (auto blackhole : blackholes)
+		blackhole->update(dt);
 
 	auto p = spaceships[shipId]->getPosition();
 
@@ -115,9 +123,11 @@ void World::lookAtMouse()
 void World::handleInputs()
 {
 	clickrate++;
-	pressrate++;// increases until it reaches 60
+	pressrate++;
+	spaceships[shipId]->setTexture(Textures::Spaceship);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+		spaceships[shipId]->setTexture(Textures::Spaceship2);
 		if (pressrate > 10)
 		{
 			audioManager.playSound(SoundEffect::ID::Engine).setVolume(1.5f);
@@ -182,11 +192,20 @@ void World::updateAsteroids()
 {
 	for (auto asteroid = asteroids.begin(); asteroid != asteroids.end();)
 	{
+		for (auto blackhole : blackholes)
+		{
+			if (Collision::PixelPerfectTest(*asteroid, blackhole))
+			{
+				(*asteroid)->decreaseHealth(2);
+			}
+		}
 		if (!(*asteroid)->isDestroyed())
 		{
 			(*asteroid)->update(time);
 			asteroid++;
+			
 		}
+		
 		else
 		{
 			audioManager.playSound(SoundEffect::ID::Explosion);
@@ -210,6 +229,7 @@ void World::updateGrenades() {
 			{
 				auto diff = spaceship->getPosition() - p;
 				auto effectDampening = 1 / function::magnitude(diff);
+				spaceship->decreaseHealth(function::magnitude(diff) * 2 / 10);
 				velocity += effectScale * effectDampening * function::normalize(diff);
 				//Damage Spaceships here
 				//....
@@ -283,6 +303,17 @@ void World::checkCollision()
 			spaceships[shipId]->decreaseHealth(1);
 		}
 	}
+	for (auto& blackhole : blackholes)
+	{
+		if (Collision::PixelPerfectTest(spaceships[shipId], blackhole))
+		{
+			auto diff = blackhole->getPosition() - spaceships[shipId]->getPosition();
+			//spaceships[shipId]->setPosition(spaceships[shipId]->getPosition() - sf::Vector2f{ 20,0 });
+			//Push back this amount
+			velocity -= 1.0f * function::normalize(diff);
+			spaceships[shipId]->decreaseHealth(1);
+		}
+	}
 	
 }
 bool World::checkAsteroidCollision(std::shared_ptr<Bullet>& bullet)
@@ -293,7 +324,8 @@ bool World::checkAsteroidCollision(std::shared_ptr<Bullet>& bullet)
 		{
 			asteroid->decreaseHealth(1);
 			return true;
-		}
+		}	
+		
 	}
 	return false;
 }
@@ -311,7 +343,10 @@ void World::draw()
 	for (auto pickup : pickups)
 		pickup->render(window);
 	for (auto grenade : grenades)
-		grenade->render(window);
+		grenade->render(window);	
+	for (auto blackhole : blackholes)
+		blackhole->render(window);
+
 }
 
 void World::loadTextures()
@@ -324,6 +359,7 @@ void World::loadTextures()
 		Pickup::loadTextures();
 		Asteroid::loadTextures();
 		Bullet::loadTextures();
+		Blackhole::loadTextures();
 	}
 }
 void World::setOtherPlayers(int other, sf::Vector2f pos, unsigned int h, float angle, bool shoot)

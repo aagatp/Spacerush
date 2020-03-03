@@ -11,6 +11,7 @@
 #include "audio.h"
 #include "collision.h"
 #include "grenade.h"
+#include "blackhole.h"
 
 class World
 {
@@ -49,6 +50,7 @@ private:
 	std::vector<std::shared_ptr<Asteroid>>asteroids;
 	std::vector<std::shared_ptr<Pickup>>pickups;
 	std::vector < std::shared_ptr<Grenade>>grenades;
+	std::vector < std::shared_ptr<Blackhole>>blackholes;
 
 	//sf::Sprite asteriod;
 	sf::Sprite finishLine;
