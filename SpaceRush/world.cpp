@@ -75,7 +75,7 @@ void World::update(sf::Time dt)
 	time = dt;
 
 	//Float value to control how fast the spaceship accelerates
-	acceleration = 2.f * function::normalize(direction);
+	acceleration = 3.f * function::normalize(direction);
 	lookAtMouse();
 
 	checkCollision();//checks collision between spaceship and asteriods;
@@ -261,8 +261,16 @@ void World::checkPickups()
 			|| Collision::PixelPerfectTest((*pickup),spaceships[otherId]))
 		{
 			audioManager.playSound(SoundEffect::ID::PickUp);
-			spaceships[shipId]->setHealth(100);
-			pickup = pickups.erase(pickup);
+			unsigned int h = spaceships[shipId]->getHealth();
+			if (static_cast<int>(h) <= 90)
+			{
+				spaceships[shipId]->setHealth(spaceships[shipId]->increaseHealth(10));  //increases health by 10 when health picked
+			}
+			else
+			{
+				spaceships[shipId]->setHealth(100);
+			}
+				pickup = pickups.erase(pickup);
 		}
 		else
 		{

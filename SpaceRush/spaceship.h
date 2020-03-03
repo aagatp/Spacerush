@@ -17,7 +17,10 @@ public:
 
     sf::FloatRect getBounds(); //Returns the bounding box to check collision
 
-    void decreaseHealth(int); 
+    void decreaseHealth(int);
+    unsigned int increaseHealth(int);
+	
+
     unsigned int getHealth(); 
     void setHealth(unsigned int); //Set the health bar to this value
 

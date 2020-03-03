@@ -71,6 +71,12 @@ void Spaceship::decreaseHealth(int amount)
     healthbar.setSize({ static_cast<float>(m_health), 15 });
 }
 
+unsigned int Spaceship::increaseHealth(int amount)
+{
+	return (m_health + amount);
+	
+}
+
 sf::FloatRect Spaceship::getBounds()
 {
     return spaceship.getGlobalBounds();
