@@ -42,7 +42,7 @@ World::World(sf::RenderWindow& window, int shipId):window(window),shipId(shipId)
 	float height = window.getSize().y;
 	//std::cout << height;
 	finishLine.setScale(3.f, 3.f);
-	finishLine.setPosition({ 500,-6000});
+	finishLine.setPosition({ 500,-6450});
 
 
 

@@ -35,6 +35,7 @@ public:
 private:
     
     sf::RectangleShape healthbar;
+	sf::RectangleShape healthbarOuter;
     TextureHolder shipTex;
     sf::Sprite spaceship;
     sf::Sprite test;

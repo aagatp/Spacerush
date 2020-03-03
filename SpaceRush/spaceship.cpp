@@ -3,10 +3,14 @@
 Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
 {
     healthbar.setSize({ static_cast<float>(m_health), 15 });
+    /*healthbar.setOutlineColor(sf::Color::White);
+    healthbar.setOutlineThickness(2);*/
+	
+	healthbarOuter.setSize({ 100, 15 });
+    healthbarOuter.setOutlineColor(sf::Color::White);
+    healthbarOuter.setOutlineThickness(2);
     
-    healthbar.setOutlineColor(sf::Color::White);
-    healthbar.setOutlineThickness(2);
-    if (a == 0)
+	if (a == 0)
     {
         shipTex.load(Textures::Spaceship, "Assets/bluespaceship.png"); // But this is working ...
         shipTex.load(Textures::Spaceship2, "Assets/bluespaceship2.png"); // But this is working ...
@@ -17,7 +21,9 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
             });
         healthbar.setFillColor(sf::Color::Cyan);
         spaceship.setPosition({100,500});
-        healthbar.setPosition(50, 600);
+		healthbarOuter.setPosition({ 50,600 });
+		healthbar.setPosition(50, 600);
+	
     }
     if (a == 1)
     {
@@ -30,6 +36,7 @@ Spaceship::Spaceship(int a) :m_playerid(a), m_angle(0)
             });
         healthbar.setFillColor(sf::Color::Red);
         spaceship.setPosition({ 700, 500});
+		healthbarOuter.setPosition({ 650,600 });
         healthbar.setPosition(650, 600);
     }
 
@@ -39,6 +46,7 @@ void Spaceship::move(sf::Vector2f pos)
 {
     speed = function::magnitude(pos);
     spaceship.move(-pos);
+	healthbarOuter.move(-pos);
     healthbar.move(-pos);
     
 }
@@ -105,5 +113,6 @@ void Spaceship::render(sf::RenderTarget& l_window)
 {
     
     l_window.draw(spaceship);
+	l_window.draw(healthbarOuter);
     l_window.draw(healthbar);
 }
