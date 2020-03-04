@@ -47,6 +47,7 @@ namespace SoundEffect
 		Button,
 		PickUp,
 		Select,
+		mineExplosion,
 	};
 }
 

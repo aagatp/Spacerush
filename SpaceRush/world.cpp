@@ -221,6 +221,7 @@ void World::updateGrenades() {
 		if ((*grenade)->getBounds().intersects(spaceships[otherId]->getBounds())||
 			(*grenade)->getBounds().intersects(spaceships[shipId]->getBounds()))
 		{
+			audioManager.playSound(SoundEffect::ID::mineExplosion);
 
 			float effectScale = 400.f;
 
@@ -243,6 +244,7 @@ void World::updateGrenades() {
 				//Damage Asteroids here
 				//....
 			}
+
 
 			grenade = grenades.erase(grenade);
 

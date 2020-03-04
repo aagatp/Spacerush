@@ -103,6 +103,7 @@ sf::Vector2f Spaceship::getPosition() { return spaceship.getPosition(); }
 void Spaceship::setPosition(sf::Vector2f position)
 {
     spaceship.setPosition(position);
+	healthbarOuter.setPosition(position + sf::Vector2f(-50, 100));
     healthbar.setPosition(position +sf::Vector2f(-50, 100));
 }
 
